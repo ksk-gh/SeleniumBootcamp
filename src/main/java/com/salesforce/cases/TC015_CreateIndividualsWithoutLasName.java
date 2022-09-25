@@ -8,14 +8,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC015_CreateIndividualsWithoutLasName {
-	public static void main(String[] args) {
+	
+		@Test
+		public void tc015(){
+		String errorText="Complete this field.";
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-notifications");
@@ -47,6 +50,11 @@ public class TC015_CreateIndividualsWithoutLasName {
 		driver.findElement(By.xpath("//label/span[text()='First Name']/following::input[1]")).sendKeys("Sankarakarthikeyan");
 
 		driver.findElement(By.xpath("(//*[@title='Save'])[1]")).click();
+		
+		String getErrorMessage = driver.findElement(By.xpath("//*[text()='Last Name']/parent::label/parent::div/parent::div//ul[contains(@class,'has-error')]")).getText();
+		
+		
+		Assert.assertEquals(errorText, getErrorMessage);
 
 		/*
 		 * WebElement snackBar =

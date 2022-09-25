@@ -12,12 +12,14 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC001_CreateOpportunity {
 
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	public static void tc01() throws InterruptedException {
 
 		/*
 		 * 1. Login to https://login.salesforce.com 
@@ -44,6 +46,10 @@ public class TC001_CreateOpportunity {
 		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
 		driver.findElement(By.id("password")).sendKeys("India$321");
 		driver.findElement(By.id("Login")).click();
+		
+		if(driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 		driver.findElement(By.xpath("//button[text()='View All']")).click();
 		driver.findElement(By.xpath("//*[text()='Sales']")).click();
