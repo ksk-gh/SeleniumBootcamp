@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TC015_CreateIndividualsWithoutLasName {
+public class TC015_CreateIndividualsWithoutLastName {
 	
 		@Test
 		public void tc015(){
