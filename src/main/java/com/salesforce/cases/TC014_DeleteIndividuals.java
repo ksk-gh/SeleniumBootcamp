@@ -1,38 +1,16 @@
 package com.salesforce.cases;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+public class TC014_DeleteIndividuals extends BaseClass {
+	@Test(priority = 2)
+	public void tc014() throws InterruptedException {
 
-public class TC014_DeleteIndividuals {
-	@Test
-	public static void tc014() throws InterruptedException {
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-notifications");
-		WebDriver driver = new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		String firstName="Sankarakarthi";
-
-		driver.get("https://login.salesforce.com/");
-		driver.manage().window().maximize();
-		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
-		driver.findElement(By.id("password")).sendKeys("India$321");
-		driver.findElement(By.id("Login")).click();
+		String firstName = "Sankarakarthi";
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -50,18 +28,18 @@ public class TC014_DeleteIndividuals {
 		driver.findElement(By.xpath("//*[@class='slds-input']")).sendKeys("Kadirvelan");
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//h1/span[text()='Recently Viewed']")).click();
-		
+
 		Thread.sleep(2000);
-		
-		WebElement clickDropDown =		driver.findElement(By.xpath("//tbody/tr[1]/td[6]/span/div/a"));
-	executor.executeScript("arguments[0].click();", clickDropDown);
+
+		WebElement clickDropDown = driver.findElement(By.xpath("//tbody/tr[1]/td[6]/span/div/a"));
+		executor.executeScript("arguments[0].click();", clickDropDown);
 		Thread.sleep(2000);
-		
-		WebElement deleteButton=driver.findElement(By.xpath("//a[@title='Delete']/parent::li"));
+
+		WebElement deleteButton = driver.findElement(By.xpath("//a[@title='Delete']/parent::li"));
 		deleteButton.click();
 
 		Thread.sleep(2000);
-		
+
 		driver.findElement(By.xpath("//button[@title='Delete']")).click();
 		/*
 		 * driver.findElement(By.xpath(
@@ -74,7 +52,7 @@ public class TC014_DeleteIndividuals {
 		 * 
 		 * driver.findElement(By.xpath("(//*[@title='Save'])[1]")).click();
 		 */
-		
+
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[1]")));
 		String snackMessage = snackBar.getText();

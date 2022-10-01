@@ -1,26 +1,19 @@
 package com.salesforce.cases;
 
-import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+public class TC001_CreateOpportunity extends BaseClass{
 
-public class TC001_CreateOpportunity {
-
+//WebDriverWait wait;	
 	@Test
-	public static void tc01() throws InterruptedException {
-
+	public void tc01() throws InterruptedException {
+		
 		/*
 		 * 1. Login to https://login.salesforce.com 
 		 * 2. Click on toggle menu button from the left corner 
@@ -33,20 +26,6 @@ public class TC001_CreateOpportunity {
 		 * 9. click Save and VerifyOppurtunity Name 
 		 * Expected Result: New Opportunity should be created with name as 'Salesforce Automation by Your Name'
 		 */
-
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-notifications");
-		RemoteWebDriver driver = new ChromeDriver(options);
-		//WebDriver driver = new WebDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
-		driver.get("https://login.salesforce.com/");
-		driver.manage().window().maximize();
-		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
-		driver.findElement(By.id("password")).sendKeys("India$321");
-		driver.findElement(By.id("Login")).click();
-		
 		if(driver.getTitle().contains("Developer Edition")) {
 			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
 		}
@@ -68,7 +47,9 @@ public class TC001_CreateOpportunity {
 		WebElement datePicker = driver.findElement(By.xpath("//input[@name='CloseDate']"));
 		executor.executeScript("arguments[0].click();", datePicker);
 
-		driver.findElement(By.xpath("//button[@name='today']")).click();
+		//driver.findElement(By.xpath("//button[contains(@class,'today slds-button')]")).click();
+		
+		driver.findElement(By.xpath("//*[@class='slds-is-today']")).click();
 
 		WebElement stageDropdown = driver.findElement(By.xpath("//*[contains(@aria-label,'Stage,')]"));
 		stageDropdown.click();

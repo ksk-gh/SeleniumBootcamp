@@ -1,46 +1,39 @@
 package com.salesforce.cases;
 
-import java.time.Duration;
-import java.util.Calendar;
-import java.util.Date;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
-public class TC002_EditOpportunity {
+public class TC002_EditOpportunity extends BaseClass{
 
 	@Test
-	public static void tc002() throws InterruptedException {
+	public void tc002() throws InterruptedException {
+		/*
+		 * 
+		 * WebDriverManager.chromedriver().setup(); ChromeOptions options = new
+		 * ChromeOptions(); options.addArguments("--disable-notifications"); WebDriver
+		 * driver =new ChromeDriver(options);
+		 * driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); String
+		 * WebDriverWait wait
+		 * = new WebDriverWait(driver,Duration.ofSeconds(30));
+		 * 
+		 * //1. Login to https://login.salesforce.com
+		 * 
+		 * driver.get("https://login.salesforce.com/");
+		 * driver.manage().window().maximize();
+		 * driver.findElement(By.id("username")).sendKeys(
+		 * "hari.radhakrishnan@qeagle.com");
+		 * driver.findElement(By.id("password")).sendKeys("India$321");
+		 * driver.findElement(By.id("Login")).click();
+		 * 
+		 * //2. Click on toggle menu button from the left corner
+		 */		
 		String verifyText="Perception Analysis";
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-notifications");
-		WebDriver driver =new ChromeDriver(options);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		String searchText="Salesforce Automation by Sankarakarthikeyan";
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
-
-		//1. Login to https://login.salesforce.com
-		
-		driver.get("https://login.salesforce.com/");
-		driver.manage().window().maximize();
-		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
-		driver.findElement(By.id("password")).sendKeys("India$321");
-		driver.findElement(By.id("Login")).click();
-		
-		//2. Click on toggle menu button from the left corner
-		
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 		
 		//3. Click view All and click Sales from App Launcher
@@ -69,7 +62,7 @@ public class TC002_EditOpportunity {
 		WebElement datePicker = driver.findElement(By.xpath("//input[@name='CloseDate']"));
 		executor.executeScript("arguments[0].click();", datePicker);
 		
-		WebElement today=driver.findElement(By.xpath("//*[contains(@class,'slds-is-today')]/span"));
+	//	WebElement today=driver.findElement(By.xpath("//*[contains(@class,'slds-is-today')]/span"));
 		/*
 		 * String todayDate = today.getText(); int i=Integer.parseInt(todayDate)+1;
 		 * driver.findElement(By.xpath("//span[text()='"+i+"']")).click();
