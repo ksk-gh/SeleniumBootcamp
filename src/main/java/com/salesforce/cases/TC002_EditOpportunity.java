@@ -10,28 +10,9 @@ import org.testng.annotations.Test;
 
 public class TC002_EditOpportunity extends BaseClass{
 
-	@Test
+	@Test//(dataProvider = "Dynamic_Data")
 	public void tc002() throws InterruptedException {
-		/*
-		 * 
-		 * WebDriverManager.chromedriver().setup(); ChromeOptions options = new
-		 * ChromeOptions(); options.addArguments("--disable-notifications"); WebDriver
-		 * driver =new ChromeDriver(options);
-		 * driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); String
-		 * WebDriverWait wait
-		 * = new WebDriverWait(driver,Duration.ofSeconds(30));
-		 * 
-		 * //1. Login to https://login.salesforce.com
-		 * 
-		 * driver.get("https://login.salesforce.com/");
-		 * driver.manage().window().maximize();
-		 * driver.findElement(By.id("username")).sendKeys(
-		 * "hari.radhakrishnan@qeagle.com");
-		 * driver.findElement(By.id("password")).sendKeys("India$321");
-		 * driver.findElement(By.id("Login")).click();
-		 * 
-		 * //2. Click on toggle menu button from the left corner
-		 */		
+		
 		String verifyText="Perception Analysis";
 		String searchText="Salesforce Automation by Sankarakarthikeyan";
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();

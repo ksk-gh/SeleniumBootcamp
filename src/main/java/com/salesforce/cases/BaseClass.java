@@ -1,5 +1,6 @@
 package com.salesforce.cases;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -16,7 +18,8 @@ public class BaseClass {
 	public ChromeDriver driver;
 	public static WebDriverWait wait;
 	JavascriptExecutor executor;
-
+	public String excelFileName;
+	
 	@BeforeMethod
 	public void BeforeMethod() {
 		WebDriverManager.chromedriver().setup();
@@ -36,6 +39,16 @@ public class BaseClass {
 
 	@AfterMethod
 	public void AfterMethod() {
-		driver.quit();
+	//driver.quit();
+	}
+	
+	@DataProvider(name= "Dynamic_Data") 	
+	public String[][] testData()throws IOException
+	{
+		String[][] data = ReadExcel.getData(excelFileName);
+		System.out.println(data[0][0] + " " +data[0][1]);
+		return data;
+		
+		
 	}
 }
