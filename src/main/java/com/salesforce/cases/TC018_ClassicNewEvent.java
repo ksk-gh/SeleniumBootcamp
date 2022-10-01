@@ -47,7 +47,7 @@ public class TC018_ClassicNewEvent extends BaseClass {
 		  Set<String> windowHandles = driver.getWindowHandles(); ArrayList<String>
 		  listOfWindows = new ArrayList<String>(windowHandles);
 		  driver.switchTo().window(listOfWindows.get(1));
-		  driver.switchTo().window(listOfWindows.get(1));
+		//  driver.switchTo().window(listOfWindows.get(1));
 		  System.out.println(listOfWindows.size()); 
 		  System.out.println("Title of Switched Window "+driver.getTitle());
 		  Thread.sleep(2000);
