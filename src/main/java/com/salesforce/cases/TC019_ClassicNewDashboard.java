@@ -2,11 +2,17 @@ package com.salesforce.cases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC019_ClassicNewDashboard extends BaseClass {
 
-	@Test
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC019";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc019() throws InterruptedException {
 		
 		if (driver.getCurrentUrl().contains("qeagle-dev-ed.my.salesforce.com")) {

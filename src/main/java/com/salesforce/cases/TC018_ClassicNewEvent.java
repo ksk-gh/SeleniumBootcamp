@@ -5,31 +5,42 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC018_ClassicNewEvent extends BaseClass {
 
-	@Test
-	public void tc018() throws InterruptedException {
-	
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC018";
+	}
 
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
+	public void tc018() throws InterruptedException {
 
 		if (driver.getTitle().contains("Developer Edition")) {
-			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
-			Thread.sleep(5000);
+			WebElement newUiLink =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='switch-to-lightning']")));
+
+			newUiLink.click();
+			//Thread.sleep(5000);
 		}
 		Thread.sleep(5000);
 
-		
 		if (driver.getCurrentUrl()
 				.equals("https://qeagle-dev-ed.lightning.force.com/lightning/setup/SetupOneHome/home")) {
-			WebElement profilePic = driver.findElement(By.xpath("//*[@data-aura-class='forceSocialPhoto']"));
-			executor.executeScript("arguments[0].click();", profilePic);
-		}
-		
+			//WebElement profilePic = driver.findElement(By.xpath("//*[@data-aura-class='forceSocialPhoto']"));
+			WebElement profilePic =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-aura-class='forceSocialPhoto']")));
 
-		WebElement classicUILink = driver.findElement(By.xpath("//*[text()='Switch to Salesforce Classic']"));
-		executor.executeScript("arguments[0].click();", classicUILink);
+			executor.executeScript("arguments[0].click();", profilePic);
+
+			WebElement classicUILink =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Switch to Salesforce Classic']")));
+			executor.executeScript("arguments[0].click();", classicUILink);
+
+		}
+
+		//WebElement classicUILink = driver.findElement(By.xpath("//*[text()='Switch to Salesforce Classic']"));
 
 		driver.findElement(By.id("createNewButton")).click();
 
@@ -43,53 +54,70 @@ public class TC018_ClassicNewEvent extends BaseClass {
 		driver.findElement(By.xpath("//*[contains(@class,'todayDate')]/following::td[2]")).click();
 
 		driver.findElement(By.id("whobtn")).click();
-	
-		  Set<String> windowHandles = driver.getWindowHandles(); ArrayList<String>
-		  listOfWindows = new ArrayList<String>(windowHandles);
-		  driver.switchTo().window(listOfWindows.get(1));
-		//  driver.switchTo().window(listOfWindows.get(1));
-		  System.out.println(listOfWindows.size()); 
-		  System.out.println("Title of Switched Window "+driver.getTitle());
-		  Thread.sleep(2000);
+
+		Set<String> windowHandles = driver.getWindowHandles();
+		ArrayList<String> listOfWindows = new ArrayList<String>(windowHandles);
+		driver.switchTo().window(listOfWindows.get(1));
+		// driver.switchTo().window(listOfWindows.get(1));
+		driver.switchTo().frame("searchFrame");
+		//System.out.println(listOfWindows.size());
+	//	System.out.println("Title of Switched Window " + driver.getTitle());
+		Thread.sleep(2000);
+
+		/*
+		 * String MainWindow = driver.getWindowHandle();
+		 * 
+		 * 
+		 * // Here we will check if child window has other child windows and when child
+		 * // window // is the main window it will come out of loop. while
+		 * (i1.hasNext()) { String ChildWindow = i1.next(); if (MainWindow !=
+		 * ChildWindow) { driver.switchTo().window(ChildWindow); // driver.close(); //
+		 * System.out.println("Child window closed"); }
+		 */
+
+		driver.findElement(By.xpath("//*[@placeholder='Search...']")).sendKeys("Neel Sourav");
+
+		driver.findElement(By.xpath("//*[@title='Go!']")).click();
+		driver.switchTo().defaultContent();
+		Thread.sleep(2000);
+		driver.switchTo().frame("resultsFrame");
+
+		driver.findElement(By.xpath("//*[contains(@class,'first')]/th/a")).click();
+		//driver.switchTo().defaultContent();
+		driver.switchTo().window(listOfWindows.get(0));
+
+		driver.findElement(By.xpath("//input[@value='Attach File']")).click();
+		// .sendKeys("F:\\Trainings\\TestLeaf\\Selenium Bootcamp\\week3\\Dummy.txt");
+
+		Set<String> windowSecondHandles = driver.getWindowHandles();
+		ArrayList<String> listOfWindows2 = new ArrayList<String>(windowSecondHandles);
+		driver.switchTo().window(listOfWindows2.get(1));
+		System.out.println(listOfWindows2.size()); // Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[@id='file']"))
+				.sendKeys("F:\\Trainings\\TestLeaf\\Selenium Bootcamp\\week3\\Dummy.txt");
+		
+		driver.findElement(By.id("Attach")).click();
+		
+		WebElement fileName =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='pbSubsection']/table/tbody/tr[1]/td[2]")));
+
+		String getFileName = fileName.getText();
+		
+		Assert.assertEquals("Dummy.txt", getFileName);
+		
+		driver.findElement(By.name("cancel")).click();
+		driver.switchTo().window(listOfWindows2.get(0));
 		
 		
-		/*String MainWindow = driver.getWindowHandle();
+		String getFileName2 = driver.findElement(By.xpath("//table[@class='list']//tr[2]/td[2]")).getText();
 		
+		Assert.assertEquals("Dummy.txt", getFileName2);
 
-		// Here we will check if child window has other child windows and when child
-		// window
-		// is the main window it will come out of loop.
-		while (i1.hasNext()) {
-			String ChildWindow = i1.next();
-			if (MainWindow != ChildWindow) {
-				driver.switchTo().window(ChildWindow);
-				// driver.close();
-				// System.out.println("Child window closed");
-			}*/
-
+		driver.findElement(By.xpath("//td[@id='topButtonRow']/input[@name='save']")).click();
 		
-		  driver.findElement(By.xpath("//*[@placeholder='Search...']")).
-		  sendKeys("Neel Sourav");
-		  
-		  driver.findElement(By.xpath("//*[@title='Go!']")).click();
-		 
-		 driver.findElement(By.xpath("//*[contains(@class,'first')]/th/a")).click();
-		  driver.switchTo().window(listOfWindows.get(0));
-		 
-
-			driver.findElement(By.xpath("//input[@value='Attach File']")).click();
-					//.sendKeys("F:\\Trainings\\TestLeaf\\Selenium Bootcamp\\week3\\Dummy.txt");
-			
-			
-			 Set<String> windowSecondHandles = driver.getWindowHandles(); 
-			 ArrayList<String> listOfWindows2 = new ArrayList<String>(windowSecondHandles);
-			 driver.switchTo().window(listOfWindows2.get(1));
-			 System.out.println(listOfWindows2.size()); //Thread.sleep(2000);
-			driver.findElement(By.xpath("//input[@id='file']")).sendKeys("F:\\Trainings\\TestLeaf\\Selenium Bootcamp\\week3\\Dummy.txt");
-			
-
-		}
-
-
+		String getRecentText = driver.findElement(By.xpath("(//*[@class='mruItem']/a[1]/span)[1]")).getText();
+		
+		Assert.assertEquals("Call", getRecentText);
+		driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
 	}
 
+}

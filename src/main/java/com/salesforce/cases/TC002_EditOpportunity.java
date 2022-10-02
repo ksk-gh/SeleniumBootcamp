@@ -6,15 +6,20 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC002_EditOpportunity extends BaseClass{
+	@BeforeTest
+	public void setData() {
+		excelFileName="TC002";
+	}
 
-	@Test//(dataProvider = "Dynamic_Data")
-	public void tc002() throws InterruptedException {
+	@Test(dataProvider = "Dynamic_Data", enabled=false)
+	public void tc002(String searchText, String verifyStageText ) throws InterruptedException {
 		
-		String verifyText="Perception Analysis";
-		String searchText="Salesforce Automation by Sankarakarthikeyan";
+		//String verifyText="Perception Analysis";
+		//String searchText="Salesforce Automation by Sankarakarthikeyan";
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 		
 		//3. Click view All and click Sales from App Launcher
@@ -53,8 +58,8 @@ public class TC002_EditOpportunity extends BaseClass{
 		
 		WebElement stageDropdown = driver.findElement(By.xpath("//*[contains(@aria-label,'Stage,')]"));
 		stageDropdown.click();
-		WebElement needAnalysisValue = driver.findElement(By.xpath("//span[@title='Perception Analysis']"));
-		needAnalysisValue.click();
+		WebElement perceptionAnalysisValue = driver.findElement(By.xpath("//span[@title='Perception Analysis']"));
+		perceptionAnalysisValue.click();
 		
 		WebElement deliveryTextbox= driver.findElement(By.xpath("//button[contains(@aria-label,'Delivery/Installation')]"));
 		
@@ -84,7 +89,7 @@ public class TC002_EditOpportunity extends BaseClass{
 
 		String getText = driver.findElement(By.xpath("//tbody/tr[1]/td[5]")).getText();
 		System.out.println(getText);
-		Assert.assertEquals(verifyText, getText);
+		Assert.assertEquals(verifyStageText, getText);
 		
 	}
 	

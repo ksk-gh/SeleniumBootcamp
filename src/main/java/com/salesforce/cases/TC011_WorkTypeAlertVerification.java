@@ -3,11 +3,17 @@ package com.salesforce.cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC011_WorkTypeAlertVerification extends BaseClass{
 
-	@Test
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC011";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc011() {
 		
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();

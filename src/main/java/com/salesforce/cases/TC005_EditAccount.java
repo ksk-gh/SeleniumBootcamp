@@ -5,10 +5,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC005_EditAccount extends BaseClass{
-	@Test
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC005";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 public void tc005() throws InterruptedException
 {
 	

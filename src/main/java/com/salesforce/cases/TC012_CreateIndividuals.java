@@ -4,11 +4,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC012_CreateIndividuals extends BaseClass {
 
-	@Test(priority = 0)
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC012";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc012() {
 
 		String toastMessage = "Individual \"Kadirvelan\" was created.";

@@ -4,10 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC013_EditIndividuals extends BaseClass {
-	@Test(priority = 1)
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC013";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc013() throws InterruptedException {
 
 		String firstName = "Sankarakarthi";

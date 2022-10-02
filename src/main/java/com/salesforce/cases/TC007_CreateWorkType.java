@@ -3,11 +3,17 @@ package com.salesforce.cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC007_CreateWorkType extends BaseClass {
 
-	@Test
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC007";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc007() {
 		/*
 		 * WebDriverManager.chromedriver().setup(); ChromeOptions options = new

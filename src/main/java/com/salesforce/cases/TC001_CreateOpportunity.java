@@ -16,7 +16,7 @@ public class TC001_CreateOpportunity extends BaseClass {
 		excelFileName="TC001";
 	}
 
-	@Test(dataProvider = "Dynamic_Data")
+	@Test(dataProvider = "Dynamic_Data", enabled = false)
 	public void tc01(String enterOpportunity, String enterSearchOpportunity) throws InterruptedException {
 
 		/*

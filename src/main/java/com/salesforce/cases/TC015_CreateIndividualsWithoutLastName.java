@@ -3,11 +3,17 @@ package com.salesforce.cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC015_CreateIndividualsWithoutLastName extends BaseClass {
 
-	@Test(priority = 4)
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC015";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc015() {
 		String errorText = "Complete this field.";
 

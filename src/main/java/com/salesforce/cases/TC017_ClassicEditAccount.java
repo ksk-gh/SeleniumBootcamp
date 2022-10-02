@@ -3,10 +3,16 @@ package com.salesforce.cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC017_ClassicEditAccount extends BaseClass {
-	@Test
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC017";
+	}
+
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc017() throws InterruptedException {
 		String street = "BHEL Nagar";
 		String city = "Thirverumber";
