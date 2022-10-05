@@ -3,6 +3,7 @@ package com.salesforce.cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -13,23 +14,9 @@ public class TC007_CreateWorkType extends BaseClass {
 		excelFileName = "TC007";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc007() {
-		/*
-		 * WebDriverManager.chromedriver().setup(); ChromeOptions options = new
-		 * ChromeOptions(); options.addArguments("--disable-notifications"); WebDriver
-		 * driver = new ChromeDriver(options);
-		 * driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		 * WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		 * 
-		 * 
-		 * driver.get("https://login.salesforce.com/");
-		 * driver.manage().window().maximize();
-		 * driver.findElement(By.id("username")).sendKeys(
-		 * "hari.radhakrishnan@qeagle.com");
-		 * driver.findElement(By.id("password")).sendKeys("India$321");
-		 * driver.findElement(By.id("Login")).click();
-		 */
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
+	public void tc007(String projectName, String textArea, String shift, String shiftTimings, String snackBarMsg1,
+			String snackBarMsg2) {
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -42,10 +29,9 @@ public class TC007_CreateWorkType extends BaseClass {
 
 		driver.findElement(By.xpath("//div[@title='New']")).click();
 
-		driver.findElement(By.xpath("//label/span[text()='Work Type Name']/following::input[1]"))
-				.sendKeys("Salesforce Project");
+		driver.findElement(By.xpath("//label/span[text()='Work Type Name']/following::input[1]")).sendKeys(projectName);
 		driver.findElement(By.xpath("//span[text()='Description']/parent::label/following-sibling::textarea"))
-				.sendKeys("Specimen");
+				.sendKeys(textArea);
 
 		driver.findElement(By.xpath("//*[@placeholder='Search Operating Hours...']")).click();
 		WebElement operatingHoursLInk = wait
@@ -55,21 +41,29 @@ public class TC007_CreateWorkType extends BaseClass {
 		// span[text()='Name']/parent::label/following-sibling::input
 		WebElement nameTextbox = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//span[text()='Name']/parent::label/following-sibling::input")));
-		nameTextbox.sendKeys("UK Shift");
+		nameTextbox.sendKeys(shift);
 		driver.findElement(By.xpath("(//*[@title='Save'])[2]")).click();
+
+		//WebElement snackBar1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]")));
+		String getSnackBar1 =driver.findElement(By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]")).getText();
+		
+	
+
+		Assert.assertEquals(snackBarMsg1, getSnackBar1);
+
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(
+				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]")));
 
 		WebElement estimatedDuration = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//span[text()='Estimated Duration']/parent::label/following-sibling::input")));
 		estimatedDuration.sendKeys("7");
 
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(
-				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]")));
-
 		driver.findElement(By.xpath("(//*[@title='Save'])[1]")).click();
 
-		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		WebElement snackBar2 = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[1]")));
-		System.out.println(snackBar.getText());
+		String getSnackBar2 = snackBar2.getText();
 
+		Assert.assertEquals(snackBarMsg2, getSnackBar2);
 	}
 }

@@ -15,9 +15,9 @@ public class TC012_CreateIndividuals extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc012() {
+	public void tc012(String lName,String toastMessage) {
 
-		String toastMessage = "Individual \"Kadirvelan\" was created.";
+		//String toastMessage = "Individual \"Kadirvelan\" was created.";
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -32,7 +32,7 @@ public class TC012_CreateIndividuals extends BaseClass {
 		WebElement newIndividualLink = driver.findElement(By.xpath("//span[text()='New Individual']"));
 		executor.executeScript("arguments[0].click();", newIndividualLink);
 
-		driver.findElement(By.xpath("//label/span[text()='Last Name']/following::input[1]")).sendKeys("Kadirvelan");
+		driver.findElement(By.xpath("//label/span[text()='Last Name']/following::input[1]")).sendKeys(lName);
 
 		driver.findElement(By.xpath("(//*[@title='Save'])[1]")).click();
 

@@ -37,7 +37,7 @@ public class BaseClass {
 		driver.findElement(By.id("Login")).click();
 	}
 
-	@AfterMethod
+	@AfterMethod(enabled = true)
 	public void AfterMethod() {
 	driver.quit();
 	}
@@ -46,7 +46,7 @@ public class BaseClass {
 	public String[][] testData()throws IOException
 	{
 		String[][] data = ReadExcel.getData(excelFileName);
-		System.out.println(data[0][0] + " " +data[0][1]);
+	//	System.out.println(data[0][0] + " " +data[0][1]);
 		return data;
 		
 		

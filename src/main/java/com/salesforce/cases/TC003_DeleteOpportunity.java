@@ -16,7 +16,7 @@ public class TC003_DeleteOpportunity extends BaseClass {
 		excelFileName = "TC003";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
+	@Test(dataProvider = "Dynamic_Data",enabled = true,invocationCount = 3)
 	public void tc003(String searchText, String noItemsText) throws InterruptedException {
 
 		// 2. Click on toggle menu button from the left corner

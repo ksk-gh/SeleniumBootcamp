@@ -2,6 +2,7 @@ package com.salesforce.cases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -23,6 +24,8 @@ public class TC017_ClassicEditAccount extends BaseClass {
 		if (driver.getTitle().contains("Developer Edition")) {
 			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
 		}
+
+		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState==\"complete\";"));
 
 		WebElement profilePic = driver.findElement(By.xpath("//*[@data-aura-class='forceSocialPhoto']"));
 		executor.executeScript("arguments[0].click();", profilePic);
@@ -71,7 +74,7 @@ public class TC017_ClassicEditAccount extends BaseClass {
 
 		Assert.assertTrue(containsAddress);
 		driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(50000);
 		// driver.close();
 
 	}

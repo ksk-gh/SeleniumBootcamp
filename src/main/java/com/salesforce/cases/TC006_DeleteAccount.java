@@ -15,13 +15,11 @@ public class TC006_DeleteAccount extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-public  void tc006() throws InterruptedException
+public  void tc006(	String accountName,String noItemsText ) throws InterruptedException
 {
 	
-
-	
-	String noItemsText = "No items to display.";
-	String accountName="Sankarakarthikeyan";
+//	String noItemsText = "No items to display.";
+	//String accountName="Sankarakarthikeyan";
 	
 	//2. Click on toggle menu button from the left corner
 	
@@ -41,11 +39,16 @@ public  void tc006() throws InterruptedException
 	driver.findElement(By.xpath("//input[@name='Account-search-input']")).sendKeys(accountName,Keys.ENTER);
 	
 	Thread.sleep(3000);
+	
+	driver.findElement(By.xpath("//button[@name='refreshButton']")).click();
 	//driver.findElement(By.xpath("//button[@name='refreshButton']")).click();
-	Thread.sleep(1000);
-	driver.findElement(By.xpath("//tbody/tr[1]/td[6]//a")).click();
-	Thread.sleep(1000);
+	//Thread.sleep(1000);
+	wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath("//tbody/tr[1]/td[6]//a"))));
 
+	WebElement firstElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tbody/tr[1]/td[6]//a")));
+
+	firstElement.click();
+	
 	driver.findElement(By.xpath("//a[@title='Delete']")).click();
 	
 	//button[@title='Delete']
@@ -57,8 +60,11 @@ public  void tc006() throws InterruptedException
 	System.out.println(snackBar.getText());
 	
 	
-	String noItemsGetText = driver.findElement(By.xpath("//span[text()='No items to display.']")).getText();
-	Assert.assertEquals(noItemsText, noItemsGetText);		
+	//String noItemsGetText = driver.findElement(By.xpath("//span[text()='No items to display.']")).getText();
+	//Assert.assertEquals(noItemsText, noItemsGetText);		
+	
+	boolean displayed = driver.findElement(By.xpath("//span[text()='No items to display.']")).isDisplayed();
+	Assert.assertTrue(displayed);
 	
 
 

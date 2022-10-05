@@ -12,9 +12,9 @@ public class TC009_EditWorkType extends BaseClass {
 		excelFileName = "TC009";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc009() {
-		
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
+	public void tc009(String startTime, String endTime) {
+
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
 		driver.findElement(By.xpath("//button[text()='View All']")).click();
@@ -29,11 +29,11 @@ public class TC009_EditWorkType extends BaseClass {
 		driver.findElement(By.xpath("//a[@title='Edit']")).click();
 		driver.findElement(By.xpath("//span[text()='Timeframe Start']/parent::label/following-sibling::input")).clear();
 		driver.findElement(By.xpath("//span[text()='Timeframe Start']/parent::label/following-sibling::input"))
-				.sendKeys("9");
+				.sendKeys(startTime);// ("9");
 		driver.findElement(By.xpath("//span[text()='Timeframe End']/parent::label/following-sibling::input")).clear();
 
 		driver.findElement(By.xpath("//span[text()='Timeframe End']/parent::label/following-sibling::input"))
-				.sendKeys("18");
+				.sendKeys(endTime);// ("18");
 
 		// span[text()='Timeframe Start']/parent::label/following-sibling::input
 		driver.findElement(By.xpath("(//*[@title='Save'])[1]")).click();

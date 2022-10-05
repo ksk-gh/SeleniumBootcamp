@@ -15,11 +15,9 @@ public class TC004_CreateAccount extends BaseClass{
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-public void tc004() throws InterruptedException
+public void tc004(String accountName) throws InterruptedException
 {
-	
-
-	String accountName="Sankarakarthikeyan";
+	//String accountName="Sankarakarthikeyan";
 	
 	//2. Click on toggle menu button from the left corner
 	
@@ -54,7 +52,7 @@ public void tc004() throws InterruptedException
 
 	Thread.sleep(3000);
 	String getAccountName = driver.findElement(By.xpath("(//*[@class='custom-truncate'])[1]")).getText();
-	System.out.println("Got the Account Name: "+getAccountName);
+	//System.out.println("Got the Account Name: "+getAccountName);
 	Assert.assertEquals(accountName, getAccountName);
 	
 }

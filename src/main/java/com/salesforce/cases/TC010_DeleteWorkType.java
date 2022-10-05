@@ -3,6 +3,7 @@ package com.salesforce.cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -13,9 +14,8 @@ public class TC010_DeleteWorkType extends BaseClass {
 		excelFileName = "TC010";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc010() {
-		
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
+	public void tc010(String snackBarText) {
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -34,7 +34,9 @@ public class TC010_DeleteWorkType extends BaseClass {
 
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
-		System.out.println(snackBar.getText());
+		String getDeletedText = snackBar.getText();
+		System.out.println(getDeletedText);
+		Assert.assertTrue(getDeletedText.contains(snackBarText));
 
 	}
 }
