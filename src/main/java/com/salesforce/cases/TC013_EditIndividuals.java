@@ -14,9 +14,9 @@ public class TC013_EditIndividuals extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc013() throws InterruptedException {
+	public void tc013(String firstName, String lastName, String verifyMessage) throws InterruptedException {
 
-		String firstName = "Sankarakarthi";
+		//String firstName = "Sankarakarthi";
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
 		driver.findElement(By.xpath("//button[text()='View All']")).click();
@@ -30,7 +30,7 @@ public class TC013_EditIndividuals extends BaseClass {
 
 		executor.executeScript("arguments[0].click();", individualsMenuLink);
 
-		driver.findElement(By.xpath("//*[@class='slds-input']")).sendKeys("Kadirvelan");
+		driver.findElement(By.xpath("//*[@class='slds-input']")).sendKeys(lastName);
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//h1/span[text()='Recently Viewed']")).click();
 
@@ -55,7 +55,21 @@ public class TC013_EditIndividuals extends BaseClass {
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[1]")));
 		String snackMessage = snackBar.getText();
+		System.out.println(snackMessage);
+		
 		System.out.println(snackMessage.contains(firstName));
-		Assert.assertTrue(snackMessage.contains(firstName));
+		Assert.assertEquals(verifyMessage, snackMessage);
 	}
 }
+
+/*
+ * driver.findElement(By.xpath("//button[@name='refreshButton']")).click();
+ * //Thread.sleep(1000);
+ * wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath(
+ * "//tbody/tr[1]/td[6]//a"))));
+ * 
+ * WebElement firstElement =
+ * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+ * "//tbody/tr[1]/td[6]//a")));
+ * 
+ */
