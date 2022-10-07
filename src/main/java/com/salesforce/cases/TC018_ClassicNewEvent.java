@@ -12,12 +12,11 @@ import org.testng.annotations.Test;
 
 public class TC018_ClassicNewEvent extends BaseClass {
 
-	@BeforeTest
-	public void setData() {
-		excelFileName = "TC018";
-	}
+	/*
+	 * @BeforeTest public void setData() { excelFileName = "TC018"; }
+	 */
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
+	@Test//(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc018() throws InterruptedException {
 
 		if (driver.getTitle().contains("Developer Edition")) {

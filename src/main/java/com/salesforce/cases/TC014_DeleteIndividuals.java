@@ -8,15 +8,16 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class TC014_DeleteIndividuals extends BaseClass {
+
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC014";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc014() throws InterruptedException {
+	@Test (dataProvider = "Dynamic_Data",enabled = true)
+	public void tc014(String lastName) throws InterruptedException {
 
-		String firstName = "Sankarakarthi";
+		//String firstName = "Sankarakarthi";
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -31,7 +32,7 @@ public class TC014_DeleteIndividuals extends BaseClass {
 
 		executor.executeScript("arguments[0].click();", individualsMenuLink);
 
-		driver.findElement(By.xpath("//*[@class='slds-input']")).sendKeys("Kadirvelan");
+		driver.findElement(By.xpath("//*[@class='slds-input']")).sendKeys(lastName);
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//h1/span[text()='Recently Viewed']")).click();
 
@@ -47,22 +48,22 @@ public class TC014_DeleteIndividuals extends BaseClass {
 		Thread.sleep(2000);
 
 		driver.findElement(By.xpath("//button[@title='Delete']")).click();
-		/*
-		 * driver.findElement(By.xpath(
-		 * "//span[text()='Salutation']/parent::span/following-sibling::div//a")).click(
-		 * ); driver.findElement(By.xpath("//a[@title='Mr.']")).click(); WebElement
-		 * firstNameTextBox = driver.findElement(By.
-		 * xpath("//label/span[text()='First Name']/following::input[1]"));
-		 * firstNameTextBox.clear(); firstNameTextBox.sendKeys(firstName);
-		 * 
-		 * 
-		 * driver.findElement(By.xpath("(//*[@title='Save'])[1]")).click();
-		 */
+		
 
-		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[1]")));
-		String snackMessage = snackBar.getText();
-		System.out.println(snackMessage.contains(firstName));
-		Assert.assertTrue(snackMessage.contains(firstName));
+		/*
+		 * WebElement snackBar =
+		 * wait.until(ExpectedConditions.visibilityOfElementLocated( By.xpath(
+		 * "(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[1]"
+		 * ))); String snackMessage = snackBar.getText();
+		 * System.out.println(snackMessage.contains(firstName));
+		 * Assert.assertTrue(snackMessage.contains(firstName));
+		 */
+		
+	//	boolean displayed = driver.findElement(By.xpath("//span[text()='No items to display.']"))
+		WebElement noItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='No items to display.']")));
+				
+		boolean displayed = noItem.isDisplayed();
+		Assert.assertTrue(displayed);
+		
 	}
 }

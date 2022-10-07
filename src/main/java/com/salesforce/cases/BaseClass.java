@@ -37,7 +37,7 @@ public class BaseClass {
 		driver.findElement(By.id("Login")).click();
 	}
 
-	@AfterMethod(enabled = true)
+	@AfterMethod(enabled = false)
 	public void AfterMethod() {
 	driver.quit();
 	}
