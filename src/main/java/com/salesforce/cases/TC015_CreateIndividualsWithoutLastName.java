@@ -14,8 +14,8 @@ public class TC015_CreateIndividualsWithoutLastName extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc015() {
-		String errorText = "Complete this field.";
+	public void tc015(String firstName, String errorText) {
+		//String errorText = "Complete this field.";
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -31,7 +31,7 @@ public class TC015_CreateIndividualsWithoutLastName extends BaseClass {
 		executor.executeScript("arguments[0].click();", newIndividualLink);
 
 		driver.findElement(By.xpath("//label/span[text()='First Name']/following::input[1]"))
-				.sendKeys("Sankarakarthikeyan");
+				.sendKeys(firstName);
 
 		driver.findElement(By.xpath("(//*[@title='Save'])[1]")).click();
 
@@ -39,17 +39,10 @@ public class TC015_CreateIndividualsWithoutLastName extends BaseClass {
 				"//*[text()='Last Name']/parent::label/parent::div/parent::div//ul[contains(@class,'has-error')]"))
 				.getText();
 
+		System.out.println(getErrorMessage);
 		Assert.assertEquals(errorText, getErrorMessage);
 
-		/*
-		 * WebElement snackBar =
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated( By.xpath(
-		 * "(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[1]"
-		 * ))); String snackMessage = snackBar.getText();
-		 * System.out.println(snackMessage);
-		 */
-
-		// Assert.assertEquals(toastMessage, snackMessage);
+		
 
 	}
 }

@@ -15,9 +15,11 @@ public class TC007_CreateWorkType extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
-	public void tc007(String projectName, String textArea, String shift, String shiftTimings, String snackBarMsg1,
-			String snackBarMsg2) {
+	public void tc007(String projectName, String textArea, String shift, String shiftTimings, String snackBarMsg2) {
 
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
 		driver.findElement(By.xpath("//button[text()='View All']")).click();
@@ -44,12 +46,22 @@ public class TC007_CreateWorkType extends BaseClass {
 		nameTextbox.sendKeys(shift);
 		driver.findElement(By.xpath("(//*[@title='Save'])[2]")).click();
 
-		//WebElement snackBar1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]")));
-		String getSnackBar1 =driver.findElement(By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]")).getText();
-		
-	
+		/*
+		 * WebElement snackBar1 =
+		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+		 * "(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]"
+		 * )));
+		 * 
+		 * String getSnackBar1 =driver.findElement(By.xpath(
+		 * "(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]"
+		 * )).getText();
+		 * 
+		 * 
+		 * 
+		 * Assert.assertEquals(snackBarMsg1, getSnackBar1);
+		 */
 
-		Assert.assertEquals(snackBarMsg1, getSnackBar1);
+		// wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]"))));
 
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[2]")));

@@ -18,14 +18,13 @@ public class TC016_ClassicCreateAccount extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc016() throws InterruptedException {
-		String street = "Street";
-		String city = "Trichy";
-		String state = "Tamilnadu";
-		String zipCode = "620001";
-		String country = "India";
-
-		String firstName = "Sankarakarthikeyan";
+	public void tc016(String firstName,String street,String city,String state,String zipCode,String country) throws InterruptedException {
+		/*
+		 * String street = "Street"; String city = "Trichy"; String state = "Tamilnadu";
+		 * String zipCode = "620001"; String country = "India";
+		 * 
+		 * String firstName = "Sankarakarthikeyan";
+		 */
 
 		if (driver.getCurrentUrl().contains("qeagle-dev-ed.my.salesforce.com")) {
 			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
@@ -103,7 +102,7 @@ public class TC016_ClassicCreateAccount extends BaseClass {
 		// driver.findElement(null)
 		// driver.findElement(By.xpath("//*[@class='dateFormat']/a")).click();
 
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 
 		driver.findElement(By.xpath("//*[@id='bottomButtonRow']/input[1]")).click();
 
@@ -119,7 +118,7 @@ public class TC016_ClassicCreateAccount extends BaseClass {
 
 		Thread.sleep(10000);
 
-		driver.close();
+		//driver.close();
 
 	}
 

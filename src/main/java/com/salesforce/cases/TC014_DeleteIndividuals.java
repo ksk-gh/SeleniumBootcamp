@@ -14,10 +14,13 @@ public class TC014_DeleteIndividuals extends BaseClass {
 		excelFileName = "TC014";
 	}
 
-	@Test (dataProvider = "Dynamic_Data",enabled = true)
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc014(String lastName) throws InterruptedException {
 
-		//String firstName = "Sankarakarthi";
+		// String firstName = "Sankarakarthi";
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -48,7 +51,6 @@ public class TC014_DeleteIndividuals extends BaseClass {
 		Thread.sleep(2000);
 
 		driver.findElement(By.xpath("//button[@title='Delete']")).click();
-		
 
 		/*
 		 * WebElement snackBar =
@@ -58,12 +60,14 @@ public class TC014_DeleteIndividuals extends BaseClass {
 		 * System.out.println(snackMessage.contains(firstName));
 		 * Assert.assertTrue(snackMessage.contains(firstName));
 		 */
-		
-	//	boolean displayed = driver.findElement(By.xpath("//span[text()='No items to display.']"))
-		WebElement noItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='No items to display.']")));
-				
+
+		// boolean displayed = driver.findElement(By.xpath("//span[text()='No items to
+		// display.']"))
+		WebElement noItem = wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='No items to display.']")));
+
 		boolean displayed = noItem.isDisplayed();
 		Assert.assertTrue(displayed);
-		
+
 	}
 }

@@ -18,8 +18,9 @@ public class TC002_EditOpportunity extends BaseClass{
 	@Test(dataProvider = "Dynamic_Data", enabled=false)
 	public void tc002(String searchText, String verifyStageText ) throws InterruptedException {
 		
-		//String verifyText="Perception Analysis";
-		//String searchText="Salesforce Automation by Sankarakarthikeyan";
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 		
 		//3. Click view All and click Sales from App Launcher

@@ -15,6 +15,9 @@ public class TC009_EditWorkType extends BaseClass {
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc009(String startTime, String endTime) {
 
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
 		driver.findElement(By.xpath("//button[text()='View All']")).click();

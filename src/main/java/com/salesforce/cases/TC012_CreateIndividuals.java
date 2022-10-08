@@ -14,10 +14,14 @@ public class TC012_CreateIndividuals extends BaseClass {
 		excelFileName = "TC012";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc012(String lName,String toastMessage) {
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
+	public void tc012(String lName, String toastMessage) {
 
-		//String toastMessage = "Individual \"Kadirvelan\" was created.";
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
+
+		// String toastMessage = "Individual \"Kadirvelan\" was created.";
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 

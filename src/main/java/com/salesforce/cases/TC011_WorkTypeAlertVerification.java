@@ -9,11 +9,17 @@ import org.testng.annotations.Test;
 
 public class TC011_WorkTypeAlertVerification extends BaseClass {
 
-	
-	  @BeforeTest public void setData() { excelFileName = "TC011"; }
-	 
+	@BeforeTest
+	public void setData() {
+		excelFileName = "TC011";
+	}
+
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
-	public void tc011(String workTpe, String reviewMsgTxt, String mainErrorMsg, String fieldErrorMsg ) {
+	public void tc011(String workTpe, String reviewMsgTxt, String mainErrorMsg, String fieldErrorMsg) {
+
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
@@ -34,15 +40,17 @@ public class TC011_WorkTypeAlertVerification extends BaseClass {
 		String reviewText = errorMessage.getText();
 		System.out.println(reviewText);
 		Assert.assertEquals(reviewMsgTxt, reviewText);
-		
+
 		WebElement errorMessageText = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='pageLevelErrors']//li")));
 		String errormessagevalue = errorMessageText.getText();
 		System.out.println(errormessagevalue);
 		Assert.assertEquals(mainErrorMsg, errormessagevalue);
 
-
-		String getFieldError = driver.findElement(By.xpath("//span[text()='Estimated Duration']/ancestor::div[contains(@class,'slds-hint-parent')]//ul")).getText();
+		String getFieldError = driver
+				.findElement(By.xpath(
+						"//span[text()='Estimated Duration']/ancestor::div[contains(@class,'slds-hint-parent')]//ul"))
+				.getText();
 		Assert.assertEquals(fieldErrorMsg, getFieldError);
 
 	}

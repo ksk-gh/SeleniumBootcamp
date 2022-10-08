@@ -13,10 +13,14 @@ public class TC013_EditIndividuals extends BaseClass {
 		excelFileName = "TC013";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc013(String firstName, String lastName, String verifyMessage) throws InterruptedException {
 
-		//String firstName = "Sankarakarthi";
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
+
+		// String firstName = "Sankarakarthi";
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
 		driver.findElement(By.xpath("//button[text()='View All']")).click();
@@ -56,7 +60,7 @@ public class TC013_EditIndividuals extends BaseClass {
 				By.xpath("(//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText'])[1]")));
 		String snackMessage = snackBar.getText();
 		System.out.println(snackMessage);
-		
+
 		System.out.println(snackMessage.contains(firstName));
 		Assert.assertEquals(verifyMessage, snackMessage);
 	}

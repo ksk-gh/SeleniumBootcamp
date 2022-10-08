@@ -16,6 +16,10 @@ public class TC010_DeleteWorkType extends BaseClass {
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc010(String snackBarText) {
+		
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 

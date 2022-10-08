@@ -13,13 +13,9 @@ public class TC017_ClassicEditAccount extends BaseClass {
 		excelFileName = "TC017";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc017() throws InterruptedException {
-		String street = "BHEL Nagar";
-		String city = "Thirverumber";
-		String state = "Tamilnadu";
-		String zipCode = "620014";
-		String country = "India";
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
+	public void tc017(String street, String city, String state, String zipCode, String country)
+			throws InterruptedException {
 
 		if (driver.getTitle().contains("Developer Edition")) {
 			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();

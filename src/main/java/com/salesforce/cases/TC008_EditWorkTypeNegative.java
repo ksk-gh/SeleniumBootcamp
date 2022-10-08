@@ -17,6 +17,9 @@ public class TC008_EditWorkTypeNegative extends BaseClass {
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc008(String startTime, String endTime, String reviewMsg, String startError, String endError) {
 
+		if (driver.getTitle().contains("Developer Edition")) {
+			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
+		}
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
 		driver.findElement(By.xpath("//button[text()='View All']")).click();

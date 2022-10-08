@@ -13,23 +13,13 @@ public class TC001_CreateOpportunity extends BaseClass {
 
 	@BeforeTest
 	public void setData() {
-		excelFileName="TC001";
+		excelFileName = "TC001";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = false)
 	public void tc01(String enterOpportunity, String enterSearchOpportunity) throws InterruptedException {
 
-		/*
-		 * 1. Login to https://login.salesforce.com 2. Click on toggle menu button from
-		 * the left corner 3. Click view All and click Sales from App Launcher 4. Click
-		 * on Opportunity tab 5. Click on New button 6. Enter Opportunity name as
-		 * 'Salesforce Automation by Your Name,Get the text and Store it 7. Choose close
-		 * date as Today 8. Select 'Stage' as Need Analysis 9. click Save and
-		 * VerifyOppurtunity Name Expected Result: New Opportunity should be created
-		 * with name as 'Salesforce Automation by Your Name'
-		 */
-		
-		System.out.println("Inside At test"+enterOpportunity+" "+enterSearchOpportunity);
+		System.out.println("Inside At test" + enterOpportunity + " " + enterSearchOpportunity);
 		if (driver.getTitle().contains("Developer Edition")) {
 			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
 		}
@@ -44,14 +34,13 @@ public class TC001_CreateOpportunity extends BaseClass {
 
 		driver.findElement(By.xpath("//div[@title='New']")).click();
 		WebElement opportunityName = driver.findElement(By.xpath("//input[@name='Name']"));
-		
+
 		opportunityName.sendKeys(enterOpportunity);
 
 		String opportunityValue = opportunityName.getAttribute("value");
 		System.out.println(opportunityValue);
 		WebElement datePicker = driver.findElement(By.xpath("//input[@name='CloseDate']"));
 		executor.executeScript("arguments[0].click();", datePicker);
-
 
 		driver.findElement(By.xpath("//*[@class='slds-is-today']")).click();
 
