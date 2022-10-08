@@ -16,10 +16,9 @@ public class TC001_CreateOpportunity extends BaseClass {
 		excelFileName = "TC001";
 	}
 
-	@Test(dataProvider = "Dynamic_Data", enabled = false)
+	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc01(String enterOpportunity, String enterSearchOpportunity) throws InterruptedException {
 
-		System.out.println("Inside At test" + enterOpportunity + " " + enterSearchOpportunity);
 		if (driver.getTitle().contains("Developer Edition")) {
 			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
 		}

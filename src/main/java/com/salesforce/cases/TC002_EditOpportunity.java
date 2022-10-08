@@ -15,7 +15,7 @@ public class TC002_EditOpportunity extends BaseClass{
 		excelFileName="TC002";
 	}
 
-	@Test(dataProvider = "Dynamic_Data", enabled=false)
+	@Test(dataProvider = "Dynamic_Data", enabled=true)
 	public void tc002(String searchText, String verifyStageText ) throws InterruptedException {
 		
 		if (driver.getTitle().contains("Developer Edition")) {

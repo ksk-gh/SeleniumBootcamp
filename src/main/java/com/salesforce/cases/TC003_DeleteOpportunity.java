@@ -16,7 +16,7 @@ public class TC003_DeleteOpportunity extends BaseClass {
 		excelFileName = "TC003";
 	}
 
-	@Test(dataProvider = "Dynamic_Data",enabled = true,invocationCount = 3)
+	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc003(String searchText, String noItemsText) throws InterruptedException {
 		
 		if (driver.getTitle().contains("Developer Edition")) {
