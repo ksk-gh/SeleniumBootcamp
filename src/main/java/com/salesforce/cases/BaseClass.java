@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -20,8 +21,10 @@ public class BaseClass {
 	JavascriptExecutor executor;
 	public String excelFileName;
 	
+	
 	@BeforeMethod
-	public void BeforeMethod() {
+	@Parameters("url")
+	public void BeforeMethod(String url) {
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-notifications");
@@ -30,7 +33,7 @@ public class BaseClass {
 		// WebDriver driver = new WebDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		driver.get("https://login.salesforce.com/");
+		driver.get(url);
 		driver.manage().window().maximize();
 		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
 		driver.findElement(By.id("password")).sendKeys("India$321");
