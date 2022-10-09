@@ -12,6 +12,5 @@ public class RetryListener implements IAnnotationTransformer {
 
 		annotation.setRetryAnalyzer(com.salesforce.utils.RetryFailedTestcases.class);
 		
-		//System.out.println(testClass+" Inside Retry "+testConstructor+ " Inside Retry "+testMethod);
 	}
 }
