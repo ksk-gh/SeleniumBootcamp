@@ -7,6 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.salesforce.base.BaseClass;
+
 public class TC007_CreateWorkType extends BaseClass {
 
 	@BeforeTest

@@ -1,4 +1,4 @@
-package com.salesforce.cases;
+package com.salesforce.base;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -13,12 +13,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 
+import com.salesforce.cases.ReadExcel;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 	public ChromeDriver driver;
 	public static WebDriverWait wait;
-	JavascriptExecutor executor;
+	public JavascriptExecutor executor;
 	public String excelFileName;
 	
 	

@@ -9,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.salesforce.base.BaseClass;
+
 public class TC001_CreateOpportunity extends BaseClass {
 
 	@BeforeTest
@@ -19,12 +21,11 @@ public class TC001_CreateOpportunity extends BaseClass {
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc01(String enterOpportunity, String enterSearchOpportunity) throws InterruptedException {
 
-		if (driver.getTitle().contains("Developer Edition")) {
-			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
-		}
-		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
-		driver.findElement(By.xpath("//button[text()='View All']")).click();
-		driver.findElement(By.xpath("//*[text()='Sales']")).click();
+		/*
+		 * if (driver.getTitle().contains("Developer Edition")) {
+		 * driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click(); }
+		 */
+
 		Thread.sleep(2000);
 		WebElement opportunityLink = driver.findElement(By.xpath("//a[@title='Opportunities']/span"));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
