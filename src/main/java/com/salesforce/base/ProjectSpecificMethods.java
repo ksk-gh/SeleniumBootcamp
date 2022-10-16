@@ -49,7 +49,6 @@ public class ProjectSpecificMethods {
 	@DataProvider(name = "Dynamic_Data")
 	public String[][] testData() throws IOException {
 		String[][] data = ReadExcel.getData(excelFileName);
-		// System.out.println(data[0][0] + " " +data[0][1]);
 		return data;
 
 	}

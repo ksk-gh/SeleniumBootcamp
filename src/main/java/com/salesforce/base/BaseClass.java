@@ -22,8 +22,7 @@ public class BaseClass {
 	public static WebDriverWait wait;
 	public JavascriptExecutor executor;
 	public String excelFileName;
-	
-	
+
 	@BeforeMethod
 	@Parameters("url")
 	public void BeforeMethod(String url) {
@@ -44,16 +43,14 @@ public class BaseClass {
 
 	@AfterMethod(enabled = true)
 	public void AfterMethod() {
-	driver.quit();
+		driver.quit();
 	}
-	
-	@DataProvider(name= "Dynamic_Data") 	
-	public String[][] testData()throws IOException
-	{
+
+	@DataProvider(name = "Dynamic_Data")
+	public String[][] testData() throws IOException {
 		String[][] data = ReadExcel.getData(excelFileName);
-	//	System.out.println(data[0][0] + " " +data[0][1]);
+		// System.out.println(data[0][0] + " " +data[0][1]);
 		return data;
-		
-		
+
 	}
 }

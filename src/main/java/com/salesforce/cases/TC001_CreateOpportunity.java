@@ -33,7 +33,7 @@ public class TC001_CreateOpportunity extends ProjectSpecificMethods {
 		.clickStageDropdown()
 		.selectNeedAnalaysisValue()
 		.clickSaveButton()
-		.getSnackBarMessage(snackBarMessage,enterOpportunity);
+		.getSnackBarMessageWithTitleVerification(snackBarMessage,enterOpportunity);
 
 	}
 

@@ -1,6 +1,7 @@
 package com.salesforce.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -40,6 +41,12 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	}
 
+	public OpportunityPage clickNextDay() {
+		driver.findElement(By.xpath("//*[contains(@class,'slds-is-today')]/following::td[1]/span[1]")).click();
+		return this;
+
+	}
+
 	public OpportunityPage clickStageDropdown() {
 		WebElement stageDropdown = driver.findElement(By.xpath("//*[contains(@aria-label,'Stage,')]"));
 		stageDropdown.click();
@@ -59,7 +66,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		return this;
 	}
 
-	public OpportunityPage getSnackBarMessage(String snackBarValue, String labelTextValue) {
+	public OpportunityPage getSnackBarMessageWithTitleVerification(String snackBarValue, String labelTextValue) {
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
 		String snackBarText = snackBar.getText();
@@ -71,6 +78,77 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 		return this;
 
+	}
+
+	public OpportunityPage getSnackBarMessage(String snackBarValue) {
+		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
+		String snackBarText = snackBar.getText();
+		Assert.assertEquals(snackBarValue, snackBarText);
+
+		return this;
+
+	}
+
+	public OpportunityPage searchOpportunity(String searchText) throws InterruptedException {
+		WebElement searchOpportunity = driver.findElement(By.xpath("//input[@name='Opportunity-search-input']"));
+		//
+		searchOpportunity.clear();
+		searchOpportunity.sendKeys(searchText, Keys.ENTER);
+		Thread.sleep(3000);
+		return this;
+	}
+
+	public OpportunityPage clickOnOpportunityText() throws InterruptedException {
+		driver.findElement(By.xpath("//lst-breadcrumbs//span[text()='Opportunities']")).click();
+		Thread.sleep(2000);
+		return this;
+	}
+
+	public OpportunityPage clickOnFirstSearchElement() {
+		driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a")).click();
+		return this;
+	}
+
+	public OpportunityPage clickOnEditButton() {
+		driver.findElement(By.xpath("//a[@title='Edit']")).click();
+		return this;
+	}
+
+	public OpportunityPage selectPerceptionAnalysisValue() {
+		WebElement perceptionAnalysisValue = driver.findElement(By.xpath("//span[@title='Perception Analysis']"));
+		perceptionAnalysisValue.click();
+		return this;
+	}
+
+	public OpportunityPage clickDeliveryTextBox() throws InterruptedException {
+		WebElement deliveryTextbox = driver
+				.findElement(By.xpath("//button[contains(@aria-label,'Delivery/Installation')]"));
+
+		Thread.sleep(1000);
+		driver.executeScript("arguments[0].click();", deliveryTextbox);
+		return this;
+	}
+
+	public OpportunityPage selectInprogressDeliveryOption() {
+		WebElement inProgress = driver.findElement(By.xpath("//*[@data-value='In progress']"));
+		driver.executeScript("arguments[0].click();", inProgress);
+		return this;
+
+	}
+
+	
+	public OpportunityPage enterDescription(String enterDescription) {
+		// driver.findElement(By.xpath("//*[@class='slds-textarea']")).sendKeys("Salesforce");
+		driver.findElement(By.xpath("//*[@class='slds-textarea']")).sendKeys(enterDescription);
+		return this;
+
+	}
+	
+	public OpportunityPage validateStageText(String verifyStageText) {
+		 String getText = driver.findElement(By.xpath("//tbody/tr[1]/td[5]")).getText();
+		 Assert.assertEquals(verifyStageText, getText);
+		 return this;
 	}
 
 	/*
