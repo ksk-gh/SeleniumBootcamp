@@ -114,6 +114,25 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		driver.findElement(By.xpath("//a[@title='Edit']")).click();
 		return this;
 	}
+	
+	public OpportunityPage clickDeleteButton() {
+		driver.findElement(By.xpath("//a[@title='Delete']")).click();
+		return this;
+	}
+	
+	public OpportunityPage acceptDelete() {
+		driver.findElement(By.xpath("//button[@title='Delete']")).click();
+		return this;
+	}
+	
+	public OpportunityPage deleteSnackBarMessage() {
+		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
+		System.out.println(snackBar.getText());
+		boolean displayed = driver.findElement(By.xpath("//span[text()='No items to display.']")).isDisplayed();
+		Assert.assertTrue(displayed);
+		return this;
+	}
 
 	public OpportunityPage selectPerceptionAnalysisValue() {
 		WebElement perceptionAnalysisValue = driver.findElement(By.xpath("//span[@title='Perception Analysis']"));

@@ -21,12 +21,15 @@ public class TC003_DeleteOpportunity extends BaseClass {
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
 	public void tc003(String searchText, String noItemsText) throws InterruptedException {
 		
-		if (driver.getTitle().contains("Developer Edition")) {
-			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
-		}
+		/*
+		 * if (driver.getTitle().contains("Developer Edition")) {
+		 * driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click(); }
+		 */
 
 		// 2. Click on toggle menu button from the left corner
 
+	
+		
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
 
 		// 3. Click view All and click Sales from App Launcher

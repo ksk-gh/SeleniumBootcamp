@@ -1,7 +1,11 @@
 package com.salesforce.base;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,10 +25,24 @@ public class ProjectSpecificMethods {
 	public static RemoteWebDriver driver;
 	public static WebDriverWait wait;
 	public String excelFileName;
+	public static Properties prop_lang;
+	public static Properties prop;
 
 	@BeforeMethod
-	@Parameters({ "browser", "url" })
-	public void BeforeMethod(String browser, String url) {
+	// @Parameters({ "browser", "url" })
+	public void BeforeMethod() throws IOException {
+		prop = new Properties();
+		FileInputStream file = new FileInputStream(new File("src/main/resources/AppConfig.properties"));
+		prop.load(file);
+		String url = prop.getProperty("appURL");
+		String browser = prop.getProperty("browser");
+		//String language=prop.getProperty("language");
+		/*
+		 * prop_lang = new Properties(); FileInputStream file1 = new FileInputStream(new
+		 * File("src/main/resources/"+language+".properties")); prop.load(file1);
+		 */
+		
+		
 		if (browser.equalsIgnoreCase("chrome")) {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--disable-notifications");
