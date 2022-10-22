@@ -49,7 +49,6 @@ public class TC002_EditOpportunity extends ProjectSpecificMethods{
 		.enterDescription(enterDescription)
 		.clickSaveButton()
 		.getSnackBarMessage(verifySnackBarText)
-				
 		.validateStageText(stageName);
 		
 		

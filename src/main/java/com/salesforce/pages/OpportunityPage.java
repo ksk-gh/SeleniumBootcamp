@@ -84,7 +84,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
 		String snackBarText = snackBar.getText();
-		Assert.assertEquals(snackBarValue, snackBarText);
+		Assert.assertEquals(snackBarValue, snackBarText.toString());
 
 		return this;
 

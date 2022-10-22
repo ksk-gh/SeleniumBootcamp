@@ -11,18 +11,18 @@ public class LoginPage extends ProjectSpecificMethods {
 	}
 
 	public LoginPage enterUserName(String userName) {
-		driver.findElement(By.id(prop.getProperty("username_id"))).sendKeys(userName);
+		driver.findElement(By.id(prop.getProperty("login.username.id"))).sendKeys(userName);
 		return this;
 	}
 
 	public LoginPage enterPassword(String password) {
-		driver.findElement(By.id(prop.getProperty("password_id"))).sendKeys(password);
+		driver.findElement(By.id(prop.getProperty("login.password.id"))).sendKeys(password);
 		return this;
 
 	}
 
 	public HomePage clickLogin() {
-		driver.findElement(By.id(prop.getProperty("loginButton_id"))).click();
+		driver.findElement(By.id(prop.getProperty("login.loginbtn.id"))).click();
 		return new HomePage();
 
 	}
