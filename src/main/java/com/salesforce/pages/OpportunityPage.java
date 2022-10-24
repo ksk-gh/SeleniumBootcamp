@@ -84,7 +84,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
 		String snackBarText = snackBar.getText();
-		Assert.assertEquals(snackBarValue, snackBarText.toString());
+		Assert.assertEquals(snackBarValue.toString(), snackBarText.toString());
 
 		return this;
 
@@ -106,7 +106,19 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage clickOnFirstSearchElement() {
-		driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a")).click();
+
+		/*
+		 * WebElement snackBar =
+		 * wait.until(ExpectedConditions.visibilityOfElementLocated(
+		 * driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a")).click();
+		 */
+
+		wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a"))));
+
+		WebElement firstElement = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tbody/tr[1]/td[8]//a")));
+
+		firstElement.click();
 		return this;
 	}
 
@@ -114,17 +126,17 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		driver.findElement(By.xpath("//a[@title='Edit']")).click();
 		return this;
 	}
-	
+
 	public OpportunityPage clickDeleteButton() {
 		driver.findElement(By.xpath("//a[@title='Delete']")).click();
 		return this;
 	}
-	
+
 	public OpportunityPage acceptDelete() {
 		driver.findElement(By.xpath("//button[@title='Delete']")).click();
 		return this;
 	}
-	
+
 	public OpportunityPage deleteSnackBarMessage() {
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
@@ -156,18 +168,25 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	}
 
-	
 	public OpportunityPage enterDescription(String enterDescription) {
 		// driver.findElement(By.xpath("//*[@class='slds-textarea']")).sendKeys("Salesforce");
+		driver.findElement(By.xpath("//*[@class='slds-textarea']")).clear();
 		driver.findElement(By.xpath("//*[@class='slds-textarea']")).sendKeys(enterDescription);
 		return this;
 
 	}
-	
+
 	public OpportunityPage validateStageText(String verifyStageText) {
-		 String getText = driver.findElement(By.xpath("//tbody/tr[1]/td[5]")).getText();
-		 Assert.assertEquals(verifyStageText, getText);
-		 return this;
+		String getText = driver.findElement(By.xpath("//tbody/tr[1]/td[5]")).getText();
+		Assert.assertEquals(verifyStageText, getText);
+		return this;
+	}
+
+	public OpportunityPage clickRefreshButton() {
+		WebElement refreshButton = driver.findElement(By.xpath("//button[@name='refreshButton']"));
+		refreshButton.click();
+		return this;
+
 	}
 
 	/*

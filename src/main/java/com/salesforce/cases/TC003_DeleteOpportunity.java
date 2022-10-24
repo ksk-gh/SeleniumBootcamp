@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.salesforce.base.BaseClass;
+import com.salesforce.pages.LoginPage;
 
 public class TC003_DeleteOpportunity extends BaseClass {
 
@@ -19,7 +20,7 @@ public class TC003_DeleteOpportunity extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc003(String searchText, String noItemsText) throws InterruptedException {
+	public void tc003(String userName, String passWord, String searchText) throws InterruptedException {
 		
 		/*
 		 * if (driver.getTitle().contains("Developer Edition")) {
@@ -28,6 +29,13 @@ public class TC003_DeleteOpportunity extends BaseClass {
 
 		// 2. Click on toggle menu button from the left corner
 
+		
+		
+LoginPage login = new LoginPage();
+		
+		login.enterUserName(userName)
+		.enterPassword(passWord)
+		.clickLogin();
 	
 		
 		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
