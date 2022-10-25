@@ -12,66 +12,73 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	public OpportunityPage clickNewButton() {
 
-		driver.findElement(By.xpath("//div[@title='New']")).click();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.newbtn.xpath"))).click();
 		return this;
 
 	}
 
 	public OpportunityPage enterOpportunityName(String enterOpportunity) {
-		driver.findElement(By.xpath("//input[@name='Name']")).sendKeys(enterOpportunity);
+		driver.findElement(By.xpath(prop.getProperty("opportunities.opportunityname.xpath")))
+				.sendKeys(enterOpportunity);
 		return this;
 
 	}
 
 	public OpportunityPage getEnteredOpportunityName() {
-		String opportunityValue = driver.findElement(By.xpath("//input[@name='Name']")).getAttribute("value");
+		String opportunityValue = driver.findElement(By.xpath(prop.getProperty("opportunities.opportunityname.xpath"))).getAttribute("value");
 		System.out.println(opportunityValue);
 		return this;
 	}
 
 	public OpportunityPage clickCloseDate() {
-		WebElement datePicker = driver.findElement(By.xpath("//input[@name='CloseDate']"));
+		WebElement datePicker = driver.findElement(By.xpath(prop.getProperty("opportunities.closedate.xpath")));
 		driver.executeScript("arguments[0].click();", datePicker);
 		return this;
 	}
 
 	public OpportunityPage clickTodayDateNumber() {
-		driver.findElement(By.xpath("//*[@class='slds-is-today']")).click();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.todaydatenumber.xpath"))).click();
 		return this;
 
 	}
 
 	public OpportunityPage clickNextDay() {
-		driver.findElement(By.xpath("//*[contains(@class,'slds-is-today')]/following::td[1]/span[1]")).click();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.nextdate.xpath"))).click();
 		return this;
 
 	}
 
 	public OpportunityPage clickStageDropdown() {
-		WebElement stageDropdown = driver.findElement(By.xpath("//*[contains(@aria-label,'Stage,')]"));
+		WebElement stageDropdown = driver.findElement(By.xpath(prop.getProperty("opportunities.stagedropdown.xpath")));
 		stageDropdown.click();
 		return this;
 
 	}
 
 	public OpportunityPage selectNeedAnalaysisValue() {
-		WebElement needAnalysisValue = driver.findElement(By.xpath("//span[@title='Needs Analysis']"));
+		WebElement needAnalysisValue = driver.findElement(By.xpath(prop.getProperty("opportunities.stagevalueNeedanalysis.xpath")));
 		needAnalysisValue.click();
+		return this;
+	}
+	
+	public OpportunityPage selectPerceptionAnalysisValue() {
+		WebElement perceptionAnalysisValue = driver.findElement(By.xpath(prop.getProperty("opportunities.stagevaluePerceptionAnalysis.xpath")));
+		perceptionAnalysisValue.click();
 		return this;
 	}
 
 	public OpportunityPage clickSaveButton() {
-		WebElement saveButton = driver.findElement(By.xpath("//button[@name='SaveEdit']"));
+		WebElement saveButton = driver.findElement(By.xpath(prop.getProperty("opportunities.savebtn.xpath")));
 		saveButton.click();
 		return this;
 	}
 
 	public OpportunityPage getSnackBarMessageWithTitleVerification(String snackBarValue, String labelTextValue) {
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
+				By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
 		String snackBarText = snackBar.getText();
 		System.out.println(snackBarText);
-		String validateLabelText = driver.findElement(By.xpath("//*[@slot='primaryField']")).getText();
+		String validateLabelText = driver.findElement(By.xpath(prop.getProperty("opportunities.opportunitylabel.xpath"))).getText();
 		System.out.println(validateLabelText);
 		Assert.assertEquals(snackBarValue, snackBarText);
 		Assert.assertEquals(labelTextValue, validateLabelText);
@@ -82,12 +89,21 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	public OpportunityPage getSnackBarMessage(String snackBarValue) {
 		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
+				By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
 		String snackBarText = snackBar.getText();
 		Assert.assertEquals(snackBarValue.toString(), snackBarText.toString());
 
 		return this;
 
+	}
+	
+	public OpportunityPage deleteSnackBarMessage(String noItems) {
+		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
+		System.out.println(snackBar.getText());
+		boolean displayed = driver.findElement(By.xpath("//span[text()='" + noItems + "']")).isDisplayed();
+		Assert.assertTrue(displayed);
+		return this;
 	}
 
 	public OpportunityPage searchOpportunity(String searchText) throws InterruptedException {
@@ -137,20 +153,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		return this;
 	}
 
-	public OpportunityPage deleteSnackBarMessage() {
-		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
-		System.out.println(snackBar.getText());
-		boolean displayed = driver.findElement(By.xpath("//span[text()='No items to display.']")).isDisplayed();
-		Assert.assertTrue(displayed);
-		return this;
-	}
 
-	public OpportunityPage selectPerceptionAnalysisValue() {
-		WebElement perceptionAnalysisValue = driver.findElement(By.xpath("//span[@title='Perception Analysis']"));
-		perceptionAnalysisValue.click();
-		return this;
-	}
 
 	public OpportunityPage clickDeliveryTextBox() throws InterruptedException {
 		WebElement deliveryTextbox = driver
