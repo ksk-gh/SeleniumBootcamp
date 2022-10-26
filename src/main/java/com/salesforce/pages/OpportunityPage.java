@@ -107,7 +107,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage searchOpportunity(String searchText) throws InterruptedException {
-		WebElement searchOpportunity = driver.findElement(By.xpath("//input[@name='Opportunity-search-input']"));
+		WebElement searchOpportunity = driver.findElement(By.xpath(prop.getProperty("opportunities.searchopportunity.xpath")));
 		//
 		searchOpportunity.clear();
 		searchOpportunity.sendKeys(searchText, Keys.ENTER);
@@ -116,7 +116,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage clickOnOpportunityText() throws InterruptedException {
-		driver.findElement(By.xpath("//lst-breadcrumbs//span[text()='Opportunities']")).click();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.opportunitytext.xpath"))).click();
 		Thread.sleep(2000);
 		return this;
 	}
@@ -129,27 +129,27 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		 * driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a")).click();
 		 */
 
-		wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a"))));
+		wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath(prop.getProperty("opportunities.firstSearchedElement.xpath")))));
 
 		WebElement firstElement = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tbody/tr[1]/td[8]//a")));
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("opportunities.firstSearchedElement.xpath"))));
 
 		firstElement.click();
 		return this;
 	}
 
 	public OpportunityPage clickOnEditButton() {
-		driver.findElement(By.xpath("//a[@title='Edit']")).click();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.editBtn.xpath"))).click();
 		return this;
 	}
 
 	public OpportunityPage clickDeleteButton() {
-		driver.findElement(By.xpath("//a[@title='Delete']")).click();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.deleteBtn.xpath"))).click();
 		return this;
 	}
 
 	public OpportunityPage acceptDelete() {
-		driver.findElement(By.xpath("//button[@title='Delete']")).click();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.acceptDelete.xpath"))).click();
 		return this;
 	}
 
@@ -157,7 +157,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	public OpportunityPage clickDeliveryTextBox() throws InterruptedException {
 		WebElement deliveryTextbox = driver
-				.findElement(By.xpath("//button[contains(@aria-label,'Delivery/Installation')]"));
+				.findElement(By.xpath(prop.getProperty("opportunities.deliverytxtbx.xpath")));
 
 		Thread.sleep(1000);
 		driver.executeScript("arguments[0].click();", deliveryTextbox);
@@ -165,7 +165,7 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage selectInprogressDeliveryOption() {
-		WebElement inProgress = driver.findElement(By.xpath("//*[@data-value='In progress']"));
+		WebElement inProgress = driver.findElement(By.xpath(prop.getProperty("opportunities.inprogressDeliveryOption.xpath")));
 		driver.executeScript("arguments[0].click();", inProgress);
 		return this;
 
@@ -173,20 +173,20 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	public OpportunityPage enterDescription(String enterDescription) {
 		// driver.findElement(By.xpath("//*[@class='slds-textarea']")).sendKeys("Salesforce");
-		driver.findElement(By.xpath("//*[@class='slds-textarea']")).clear();
-		driver.findElement(By.xpath("//*[@class='slds-textarea']")).sendKeys(enterDescription);
+		driver.findElement(By.xpath(prop.getProperty("opportunities.description.xpath"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("opportunities.description.xpath"))).sendKeys(enterDescription);
 		return this;
 
 	}
 
 	public OpportunityPage validateStageText(String verifyStageText) {
-		String getText = driver.findElement(By.xpath("//tbody/tr[1]/td[5]")).getText();
+		String getText = driver.findElement(By.xpath(prop.getProperty("opportunities.stagetextresults.xpath"))).getText();
 		Assert.assertEquals(verifyStageText, getText);
 		return this;
 	}
 
 	public OpportunityPage clickRefreshButton() {
-		WebElement refreshButton = driver.findElement(By.xpath("//button[@name='refreshButton']"));
+		WebElement refreshButton = driver.findElement(By.xpath(prop.getProperty("opportunities.refreshbtn.xpath")));
 		refreshButton.click();
 		return this;
 

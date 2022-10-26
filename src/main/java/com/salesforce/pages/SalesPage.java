@@ -15,4 +15,16 @@ public class SalesPage extends ProjectSpecificMethods{
 		return new OpportunityPage();
 
 	}
+	
+	
+	public AccountsPage clickAccountsLink() {
+		//WebElement opportunityLink = driver.findElement(By.xpath("//a[@title='Opportunities']/span"));
+		WebElement accountsLink = driver.findElement(By.xpath(prop.getProperty("sales.accountslink.xpath")));
+		// JavascriptExecutor executor = (JavascriptExecutor)driver;
+		driver.executeScript("arguments[0].click();", accountsLink);
+		return new AccountsPage();
+
+	}
+	
+	
 }
