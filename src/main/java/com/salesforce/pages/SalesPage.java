@@ -27,12 +27,6 @@ public class SalesPage extends ProjectSpecificMethods {
 
 	}
 
-	public WorkTypesPage clickWorkTypesLink() {
-		WebElement workTypesLink = driver
-				.findElement(By.xpath("//*[contains(@class,'slds-truncate') and text()='Work Types']"));
 
-		driver.executeScript("arguments[0].click();", workTypesLink);
-		return new WorkTypesPage();
-	}
 
 }
