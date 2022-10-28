@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.salesforce.base.BaseClass;
+import com.salesforce.pages.LoginPage;
 
 public class TC007_CreateWorkType extends BaseClass {
 
@@ -17,15 +18,28 @@ public class TC007_CreateWorkType extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
-	public void tc007(String projectName, String textArea, String shift, String shiftTimings, String snackBarMsg2) {
+	public void tc007(String username, String password, String projectName, String textArea, String shift, String shiftTimings, String snackBarMsg2) {
 
-		if (driver.getTitle().contains("Developer Edition")) {
-			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
-		}
-		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
-
-		driver.findElement(By.xpath("//button[text()='View All']")).click();
-
+		/*
+		 * if (driver.getTitle().contains("Developer Edition")) {
+		 * driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click(); }
+		 * driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+		 * 
+		 * driver.findElement(By.xpath("//button[text()='View All']")).click();
+		 */
+		
+	LoginPage loginPage = new LoginPage();
+		
+		loginPage.enterUserName(username)
+		.enterPassword(password)
+		.clickLogin()
+		.clickAppLauncher()
+		.clickViewAll();
+		
+		
+		
+		
+		
 		WebElement workTypesLink = driver
 				.findElement(By.xpath("//*[contains(@class,'slds-truncate') and text()='Work Types']"));
 
