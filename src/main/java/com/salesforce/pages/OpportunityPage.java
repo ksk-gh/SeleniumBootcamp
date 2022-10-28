@@ -25,7 +25,8 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage getEnteredOpportunityName() {
-		String opportunityValue = driver.findElement(By.xpath(prop.getProperty("opportunities.opportunityname.xpath"))).getAttribute("value");
+		String opportunityValue = driver.findElement(By.xpath(prop.getProperty("opportunities.opportunityname.xpath")))
+				.getAttribute("value");
 		System.out.println(opportunityValue);
 		return this;
 	}
@@ -56,13 +57,15 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage selectNeedAnalaysisValue() {
-		WebElement needAnalysisValue = driver.findElement(By.xpath(prop.getProperty("opportunities.stagevalueNeedanalysis.xpath")));
+		WebElement needAnalysisValue = driver
+				.findElement(By.xpath(prop.getProperty("opportunities.stagevalueNeedanalysis.xpath")));
 		needAnalysisValue.click();
 		return this;
 	}
-	
+
 	public OpportunityPage selectPerceptionAnalysisValue() {
-		WebElement perceptionAnalysisValue = driver.findElement(By.xpath(prop.getProperty("opportunities.stagevaluePerceptionAnalysis.xpath")));
+		WebElement perceptionAnalysisValue = driver
+				.findElement(By.xpath(prop.getProperty("opportunities.stagevaluePerceptionAnalysis.xpath")));
 		perceptionAnalysisValue.click();
 		return this;
 	}
@@ -74,11 +77,12 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage getSnackBarMessageWithTitleVerification(String snackBarValue, String labelTextValue) {
-		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
+		WebElement snackBar = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
 		String snackBarText = snackBar.getText();
 		System.out.println(snackBarText);
-		String validateLabelText = driver.findElement(By.xpath(prop.getProperty("opportunities.opportunitylabel.xpath"))).getText();
+		String validateLabelText = driver
+				.findElement(By.xpath(prop.getProperty("opportunities.opportunitylabel.xpath"))).getText();
 		System.out.println(validateLabelText);
 		Assert.assertEquals(snackBarValue, snackBarText);
 		Assert.assertEquals(labelTextValue, validateLabelText);
@@ -88,18 +92,18 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage getSnackBarMessage(String snackBarValue) {
-		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
+		WebElement snackBar = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
 		String snackBarText = snackBar.getText();
 		Assert.assertEquals(snackBarValue.toString(), snackBarText.toString());
 
 		return this;
 
 	}
-	
+
 	public OpportunityPage deleteSnackBarMessage(String noItems) {
-		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
+		WebElement snackBar = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(prop.getProperty("opportunities.snackbarmsg.xpath"))));
 		System.out.println(snackBar.getText());
 		boolean displayed = driver.findElement(By.xpath("//span[text()='" + noItems + "']")).isDisplayed();
 		Assert.assertTrue(displayed);
@@ -107,8 +111,9 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage searchOpportunity(String searchText) throws InterruptedException {
-		WebElement searchOpportunity = driver.findElement(By.xpath(prop.getProperty("opportunities.searchopportunity.xpath")));
-		//
+		WebElement searchOpportunity = driver
+				.findElement(By.xpath(prop.getProperty("opportunities.searchopportunity.xpath")));
+
 		searchOpportunity.clear();
 		searchOpportunity.sendKeys(searchText, Keys.ENTER);
 		Thread.sleep(3000);
@@ -123,16 +128,11 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	public OpportunityPage clickOnFirstSearchElement() {
 
-		/*
-		 * WebElement snackBar =
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(
-		 * driver.findElement(By.xpath("//tbody/tr[1]/td[8]//a")).click();
-		 */
+		wait.until(ExpectedConditions.stalenessOf(
+				driver.findElement(By.xpath(prop.getProperty("opportunities.firstSearchedElement.xpath")))));
 
-		wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath(prop.getProperty("opportunities.firstSearchedElement.xpath")))));
-
-		WebElement firstElement = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("opportunities.firstSearchedElement.xpath"))));
+		WebElement firstElement = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(prop.getProperty("opportunities.firstSearchedElement.xpath"))));
 
 		firstElement.click();
 		return this;
@@ -153,8 +153,6 @@ public class OpportunityPage extends ProjectSpecificMethods {
 		return this;
 	}
 
-
-
 	public OpportunityPage clickDeliveryTextBox() throws InterruptedException {
 		WebElement deliveryTextbox = driver
 				.findElement(By.xpath(prop.getProperty("opportunities.deliverytxtbx.xpath")));
@@ -165,7 +163,8 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage selectInprogressDeliveryOption() {
-		WebElement inProgress = driver.findElement(By.xpath(prop.getProperty("opportunities.inprogressDeliveryOption.xpath")));
+		WebElement inProgress = driver
+				.findElement(By.xpath(prop.getProperty("opportunities.inprogressDeliveryOption.xpath")));
 		driver.executeScript("arguments[0].click();", inProgress);
 		return this;
 
@@ -180,7 +179,8 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage validateStageText(String verifyStageText) {
-		String getText = driver.findElement(By.xpath(prop.getProperty("opportunities.stagetextresults.xpath"))).getText();
+		String getText = driver.findElement(By.xpath(prop.getProperty("opportunities.stagetextresults.xpath")))
+				.getText();
 		Assert.assertEquals(verifyStageText, getText);
 		return this;
 	}
