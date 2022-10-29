@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import com.salesforce.base.BaseClass;
 
-public class TC016_ClassicCreateAccount extends BaseClass {
+public class TC019_ClassicCreateAccount extends BaseClass {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC016";

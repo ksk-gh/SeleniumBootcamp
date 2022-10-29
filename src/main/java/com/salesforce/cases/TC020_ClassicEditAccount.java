@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import com.salesforce.base.BaseClass;
 
-public class TC017_ClassicEditAccount extends BaseClass {
+public class TC020_ClassicEditAccount extends BaseClass {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC017";

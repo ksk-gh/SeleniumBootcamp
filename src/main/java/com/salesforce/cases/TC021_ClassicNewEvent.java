@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import com.salesforce.base.BaseClass;
 
-public class TC018_ClassicNewEvent extends BaseClass {
+public class TC021_ClassicNewEvent extends BaseClass {
 
 	@BeforeTest
 	public void setData() {
