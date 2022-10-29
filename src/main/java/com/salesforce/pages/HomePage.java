@@ -15,7 +15,7 @@ public class HomePage extends ProjectSpecificMethods {
 	}
 
 	public HomePage clickViewAll() {
-		//driver.findElement(By.xpath("//button[text()='View All']")).click();
+		// driver.findElement(By.xpath("//button[text()='View All']")).click();
 		driver.findElement(By.xpath(prop.getProperty("home.viewall.xpath"))).click();
 
 		return this;
@@ -23,20 +23,27 @@ public class HomePage extends ProjectSpecificMethods {
 	}
 
 	public SalesPage clickSalesLink() throws InterruptedException {
-		//driver.findElement(By.xpath("//*[text()='Sales']")).click();
+		// driver.findElement(By.xpath("//*[text()='Sales']")).click();
 		driver.findElement(By.xpath(prop.getProperty("home.saleslink.xpath"))).click();
 
 		Thread.sleep(5000);
 		return new SalesPage();
 
 	}
-	
+
 	public WorkTypesPage clickWorkTypesLink() {
-		WebElement workTypesLink = driver
-				.findElement(By.xpath("//*[contains(@class,'slds-truncate') and text()='Work Types']"));
+		WebElement workTypesLink = driver.findElement(By.xpath(prop.getProperty("home.worktypelink.xpath")));
 
 		driver.executeScript("arguments[0].click();", workTypesLink);
 		return new WorkTypesPage();
+	}
+
+	public IndividualsPage clickIndividualsLink() {
+
+		WebElement individualLink = driver.findElement(By.xpath(prop.getProperty("home.individualslink.xpath")));
+
+		driver.executeScript("arguments[0].click();", individualLink);
+		return new IndividualsPage();
 	}
 
 }
