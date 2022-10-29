@@ -113,4 +113,13 @@ public class IndividualsPage extends ProjectSpecificMethods {
 		Assert.assertTrue(displayed);
 		return this;
 	}
+	
+	public IndividualsPage validateLastNameErrormessage(String errorText) {
+		String getErrorMessage = driver.findElement(By.xpath(prop.getProperty("individuals.lastnameerrormsg.xpath")))
+				.getText();
+
+		System.out.println(getErrorMessage);
+		Assert.assertEquals(errorText, getErrorMessage);
+		return this;
+	}
 }

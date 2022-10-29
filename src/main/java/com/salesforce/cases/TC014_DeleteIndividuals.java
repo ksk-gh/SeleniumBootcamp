@@ -24,9 +24,19 @@ public class TC014_DeleteIndividuals extends ProjectSpecificMethods {
 
 		LoginPage login = new LoginPage();
 
-		login.enterUserName(username).enterPassword(password).clickLogin().clickAppLauncher().clickViewAll()
-				.clickIndividualsLink().clickIndividualsMenu().enterSearchText(lastName).clickRecentlyViewed()
-				.selectFirstElement().clickDeleteButton().acceptDelete().noItemDisplayed();
+		login.enterUserName(username)
+		.enterPassword(password)
+		.clickLogin()
+		.clickAppLauncher()
+		.clickViewAll()
+		.clickIndividualsLink()
+		.clickIndividualsMenu()
+		.enterSearchText(lastName)
+		.clickRecentlyViewed()
+		.selectFirstElement()
+		.clickDeleteButton()
+		.acceptDelete()
+		.noItemDisplayed();
 
 		/*
 		 * driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
