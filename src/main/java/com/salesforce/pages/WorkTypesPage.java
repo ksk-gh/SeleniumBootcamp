@@ -80,36 +80,32 @@ public class WorkTypesPage extends ProjectSpecificMethods {
 
 		return this;
 	}
+
 	public WorkTypesPage clickOnFirstElement() {
 		driver.findElement(By.xpath(prop.getProperty("worktypes.firstelement.xpath"))).click();
-return this;
+		return this;
 	}
 
-	
 	public WorkTypesPage clickEditButton() {
 		driver.findElement(By.xpath(prop.getProperty("worktypes.editBtn.xpath"))).click();
 
 		return this;
 	}
-	
+
 	public WorkTypesPage enterStartDay(String startTime) {
-		WebElement startDay = driver
-				.findElement(By.xpath(prop.getProperty("worktypes.startday.xpath")));
+		WebElement startDay = driver.findElement(By.xpath(prop.getProperty("worktypes.startday.xpath")));
 		startDay.clear();
 		startDay.sendKeys(startTime);
 		return this;
 	}
-	
+
 	public WorkTypesPage enterEndDay(String endTime) {
-		WebElement endDay = driver
-				.findElement(By.xpath(prop.getProperty("worktypes.endday.xpath")));
+		WebElement endDay = driver.findElement(By.xpath(prop.getProperty("worktypes.endday.xpath")));
 		endDay.clear();
 		endDay.sendKeys(endTime);
 		return this;
-	}	
+	}
 
-
-	
 	public WorkTypesPage validateReviewErrorMsg(String reviewError) {
 		WebElement errorMessage = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("worktypes.reviewmsg.xpath"))));
@@ -117,29 +113,60 @@ return this;
 		Assert.assertEquals(reviewError, reviewText);
 		return this;
 	}
-	
+
 	public WorkTypesPage validateStartErrorMsg(String startError) {
-		String getStartErrorMsg = driver
-				.findElement(By.xpath(prop.getProperty("worktypes.starterror.xpath"))).getText();
+		String getStartErrorMsg = driver.findElement(By.xpath(prop.getProperty("worktypes.starterror.xpath")))
+				.getText();
 
 		Assert.assertEquals(startError, getStartErrorMsg);
 		return this;
 	}
-	
+
 	public WorkTypesPage validateEndErrorMsg(String endError) {
-		String getEndErrorMsg = driver.findElement(By.xpath(prop.getProperty("worktypes.enderror.xpath")))
-				.getText();
+		String getEndErrorMsg = driver.findElement(By.xpath(prop.getProperty("worktypes.enderror.xpath"))).getText();
 
 		Assert.assertEquals(endError, getEndErrorMsg);
 		return this;
 	}
 
+	public WorkTypesPage getSnackBarMessage() {
+		WebElement snackBar = wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("worktypes.snackbar.xpath"))));
+		System.out.println(snackBar.getText());
+		return this;
+	}
+
+	public WorkTypesPage clickDeleteButton() {
+		driver.findElement(By.xpath(prop.getProperty("accounts.deleteBtn.xpath"))).click();
+		return this;
+	}
+
+	public WorkTypesPage acceptDelete() {
+		driver.findElement(By.xpath(prop.getProperty("accounts.acceptDelete.xpath"))).click();
+		return this;
+	}
+
+	public WorkTypesPage validateSnackBarMsgContains(String snackBarText) {
+		WebElement snackBar = wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("worktypes.snackbar.xpath"))));
+		String getDeletedText = snackBar.getText();
+		System.out.println(getDeletedText);
+		Assert.assertTrue(getDeletedText.contains(snackBarText));
+		return this;
+	}
+public WorkTypesPage validateSpecificErrorMsg(String mainErrorMsg) {
+	 WebElement errorMessageText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("worktypes.specificerrormsg.xpath")))); 
+	 String errormessagevalue = errorMessageText.getText(); System.out.println(errormessagevalue);
+	 Assert.assertEquals(mainErrorMsg, errormessagevalue);
 	
-	
-	
-	
-	
-	
-	
-	
+	return this;
+}
+
+public WorkTypesPage validateFieldLevelErrorMsg(String fieldErrorMsg) {
+	 String getFieldError = driver .findElement(By.xpath(prop.getProperty("worktypes.fieldlevelerror.xpath"))).getText(); 
+	 Assert.assertEquals(fieldErrorMsg, getFieldError);
+	return this;
+}
+
+
 }

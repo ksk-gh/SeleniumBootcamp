@@ -8,8 +8,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.salesforce.base.BaseClass;
+import com.salesforce.base.ProjectSpecificMethods;
+import com.salesforce.pages.LoginPage;
 
-public class TC010_DeleteWorkType extends BaseClass {
+public class TC010_DeleteWorkType extends ProjectSpecificMethods {
 
 	@BeforeTest
 	public void setData() {
@@ -17,32 +19,53 @@ public class TC010_DeleteWorkType extends BaseClass {
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
-	public void tc010(String snackBarText) {
+	public void tc010(String username, String password,String snackBarText) {
 		
-		if (driver.getTitle().contains("Developer Edition")) {
-			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
-		}
+	
+		
+		LoginPage loginPage = new LoginPage();
 
-		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
-
-		driver.findElement(By.xpath("//button[text()='View All']")).click();
-
-		WebElement workTypesLink = driver
-				.findElement(By.xpath("//*[contains(@class,'slds-truncate') and text()='Work Types']"));
-
-		executor.executeScript("arguments[0].click();", workTypesLink);
-
-		driver.findElement(By.xpath("//tbody/tr[1]/td[5]//a")).click();
-
-		driver.findElement(By.xpath("//a[@title='Delete']")).click();
-
-		driver.findElement(By.xpath("//button[@title='Delete']")).click();
-
-		WebElement snackBar = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']")));
-		String getDeletedText = snackBar.getText();
-		System.out.println(getDeletedText);
-		Assert.assertTrue(getDeletedText.contains(snackBarText));
+		loginPage.enterUserName(username)
+		.enterPassword(password)
+		.clickLogin()
+		.clickAppLauncher()
+		.clickViewAll()
+		.clickWorkTypesLink()
+		.clickOnFirstElement()
+		.clickDeleteButton()
+		.acceptDelete()
+		.validateSnackBarMsgContains(snackBarText)
+		;
+		
+		
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+		 * 
+		 * driver.findElement(By.xpath("//button[text()='View All']")).click();
+		 * 
+		 * WebElement workTypesLink = driver .findElement(By.
+		 * xpath("//*[contains(@class,'slds-truncate') and text()='Work Types']"));
+		 * 
+		 * driver.executeScript("arguments[0].click();", workTypesLink);
+		 * 
+		 * driver.findElement(By.xpath("//tbody/tr[1]/td[5]//a")).click();
+		 * 
+		 * driver.findElement(By.xpath("//a[@title='Delete']")).click();
+		 * 
+		 * driver.findElement(By.xpath("//button[@title='Delete']")).click();
+		 * 
+		 * WebElement snackBar =
+		 * wait.until(ExpectedConditions.visibilityOfElementLocated( By.xpath(
+		 * "//*[@class='forceVisualMessageQueue']//span[@data-aura-class='forceActionsText']"
+		 * ))); String getDeletedText = snackBar.getText();
+		 * System.out.println(getDeletedText);
+		 * Assert.assertTrue(getDeletedText.contains(snackBarText));
+		 */
 
 	}
 }
