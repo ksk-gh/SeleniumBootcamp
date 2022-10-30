@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 
-import com.salesforce.cases.ReadExcel;
+import com.salesforce.utils.ReadExcel;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 

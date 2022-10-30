@@ -34,9 +34,9 @@
 
 	<test name="Individuals" enabled="true">
 		<classes>
-		<!-- 	<class name="com.salesforce.cases.TC012_CreateIndividuals" />
-			<class name="com.salesforce.cases.TC013_EditIndividuals" /> -->
-		<!-- 	<class name="com.salesforce.cases.TC014_DeleteIndividuals" />-->
+			<class name="com.salesforce.cases.TC012_CreateIndividuals" />
+			<class name="com.salesforce.cases.TC013_EditIndividuals" />
+			<class name="com.salesforce.cases.TC014_DeleteIndividuals" />
 			<class name="com.salesforce.cases.TC015_CreateIndividualsWithoutLastName" 
 				/> 
 		</classes>
@@ -46,8 +46,8 @@
 		<classes>
 			<!-- <class name="com.salesforce.cases.TC016_ClassicCreateAccount"/> <class 
 				name="com.salesforce.cases.TC017_ClassicEditAccount" /> -->
-			<class name="com.salesforce.cases.TC018_ClassicNewEvent" />
-			<!-- <class name="com.salesforce.cases.TC019_ClassicNewDashboard" /> -->
+<!-- 			<class name="com.salesforce.cases.TC018_ClassicNewEvent" />
+ -->			<!-- <class name="com.salesforce.cases.TC019_ClassicNewDashboard" /> -->
 		</classes>
 	</test>
 

@@ -93,12 +93,12 @@ public class IndividualsPage extends ProjectSpecificMethods {
 	
 	
 	public IndividualsPage clickDeleteButton() {
-		driver.findElement(By.xpath(prop.getProperty("individuals.deleteBtn.xpath"))).click();
+		driver.findElement(By.xpath(prop.getProperty("individuals.deletebutton.xpath"))).click();
 		return this;
 	}
 
 	public IndividualsPage acceptDelete() {
-		driver.findElement(By.xpath(prop.getProperty("individuals.acceptDelete.xpath"))).click();
+		driver.findElement(By.xpath(prop.getProperty("individuals.acceptdelete.xpath"))).click();
 		return this;
 	}
 	
