@@ -11,9 +11,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.salesforce.base.BaseClass;
+import com.salesforce.base.BaseClassNonPOM;
 
-public class TC019_ClassicCreateAccount extends BaseClass {
+public class TC019_ClassicCreateAccount extends BaseClassNonPOM {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC016";

@@ -10,9 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.salesforce.base.BaseClass;
+import com.salesforce.base.BaseClassNonPOM;
 
-public class TC021_ClassicNewEvent extends BaseClass {
+public class TC021_ClassicNewEvent extends BaseClassNonPOM {
 
 	@BeforeTest
 	public void setData() {

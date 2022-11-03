@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite" thread-count="5" verbose="10">
-	<listeners> <listener class-name="com.salesforce.utils.RetryListener"></listener> 
-		</listeners>
+	<listeners>
+		<listener class-name="com.salesforce.utils.RetryListener"></listener>
+	</listeners>
 	<!-- <parameter name="url" value="https://login.salesforce.com/" /> <parameter 
 		name="browser" value="chrome" /> -->
-	<test thread-count="5" name="Opportunities" enabled="false"
+	<test thread-count="5" name="Opportunities" enabled="true"
 		parallel="false">
 		<classes>
 			<class name="com.salesforce.cases.TC001_CreateOpportunity" />
@@ -13,7 +14,7 @@
 			<class name="com.salesforce.cases.TC003_DeleteOpportunity" />
 		</classes>
 	</test>
-	<test name="Accounts" enabled="false">
+	<test name="Accounts" enabled="true">
 		<classes>
 			<class name="com.salesforce.cases.TC004_CreateAccount" />
 			<class name="com.salesforce.cases.TC005_EditAccount" />
@@ -21,13 +22,13 @@
 		</classes>
 	</test>
 
-	<test name="WorkTypes" enabled="false">
+	<test name="WorkTypes" enabled="true">
 		<classes>
 			<class name="com.salesforce.cases.TC007_CreateWorkType" />
 			<class name="com.salesforce.cases.TC008_EditWorkTypeNegative" />
 			<class name="com.salesforce.cases.TC009_EditWorkType" />
-		<class name="com.salesforce.cases.TC010_DeleteWorkType" />
-				<class
+			<class name="com.salesforce.cases.TC010_DeleteWorkType" />
+			<class
 				name="com.salesforce.cases.TC011_WorkTypeAlertVerification" />
 		</classes>
 	</test>
@@ -37,17 +38,14 @@
 			<class name="com.salesforce.cases.TC012_CreateIndividuals" />
 			<class name="com.salesforce.cases.TC013_EditIndividuals" />
 			<class name="com.salesforce.cases.TC014_DeleteIndividuals" />
-			<class name="com.salesforce.cases.TC015_CreateIndividualsWithoutLastName" 
-				/> 
+			<class
+				name="com.salesforce.cases.TC015_CreateIndividualsWithoutLastName" />
 		</classes>
 	</test>
 
-	<test name="Classic" enabled="false">
+	<test name="Tasks" enabled="true">
 		<classes>
-			<!-- <class name="com.salesforce.cases.TC016_ClassicCreateAccount"/> <class 
-				name="com.salesforce.cases.TC017_ClassicEditAccount" /> -->
-<!-- 			<class name="com.salesforce.cases.TC018_ClassicNewEvent" />
- -->			<!-- <class name="com.salesforce.cases.TC019_ClassicNewDashboard" /> -->
+		<class name="com.salesforce.cases.TC016_CreateTask"/>
 		</classes>
 	</test>
 

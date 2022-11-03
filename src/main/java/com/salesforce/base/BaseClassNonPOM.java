@@ -17,7 +17,7 @@ import com.salesforce.utils.ReadExcel;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class BaseClass {
+public class BaseClassNonPOM {
 	public ChromeDriver driver;
 	public static WebDriverWait wait;
 	public JavascriptExecutor executor;
