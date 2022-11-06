@@ -13,6 +13,9 @@ public class AccountsPage extends ProjectSpecificMethods {
 	public AccountsPage clickNewButton() {
 
 		driver.findElement(By.xpath(prop.getProperty("accounts.newbtn.xpath"))).click();
+		
+		
+		//click();
 		return this;
 
 	}

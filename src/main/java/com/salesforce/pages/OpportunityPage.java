@@ -12,54 +12,65 @@ public class OpportunityPage extends ProjectSpecificMethods {
 
 	public OpportunityPage clickNewButton() {
 
-		driver.findElement(By.xpath(prop.getProperty("opportunities.newbtn.xpath"))).click();
+		// driver.findElement(By.xpath(prop.getProperty("opportunities.newbtn.xpath"))).click();
+
+		click(locateElement("xpath", prop.getProperty("opportunities.newbtn.xpath")));
 		return this;
 
 	}
 
 	public OpportunityPage enterOpportunityName(String enterOpportunity) {
-		driver.findElement(By.xpath(prop.getProperty("opportunities.opportunityname.xpath")))
-				.sendKeys(enterOpportunity);
+		/*
+		 * driver.findElement(By.xpath(prop.getProperty(
+		 * "opportunities.opportunityname.xpath"))) .sendKeys(enterOpportunity);
+		 */
+		type(locateElement("xpath", prop.getProperty("opportunities.opportunityname.xpath")), enterOpportunity);
 		return this;
 
 	}
 
 	public OpportunityPage getEnteredOpportunityName() {
-		String opportunityValue = driver.findElement(By.xpath(prop.getProperty("opportunities.opportunityname.xpath")))
-				.getAttribute("value");
-		System.out.println(opportunityValue);
+		/*
+		 * String opportunityValue = driver.findElement(By.xpath(prop.getProperty(
+		 * "opportunities.opportunityname.xpath"))) .getAttribute("value");
+		 */
+		
+		getEnteredText(locateElement("xpath", prop.getProperty("opportunities.opportunityname.xpath")));
 		return this;
 	}
 
 	public OpportunityPage clickCloseDate() {
-		WebElement datePicker = driver.findElement(By.xpath(prop.getProperty("opportunities.closedate.xpath")));
-		driver.executeScript("arguments[0].click();", datePicker);
+
+		clickUsingJs(locateElement("xpath", prop.getProperty("opportunities.closedate.xpath")));
+
 		return this;
 	}
 
 	public OpportunityPage clickTodayDateNumber() {
-		driver.findElement(By.xpath(prop.getProperty("opportunities.todaydatenumber.xpath"))).click();
+		click(locateElement("xpath", prop.getProperty("opportunities.todaydatenumber.xpath")));
 		return this;
 
 	}
 
 	public OpportunityPage clickNextDay() {
-		driver.findElement(By.xpath(prop.getProperty("opportunities.nextdate.xpath"))).click();
+		// driver.findElement(By.xpath(prop.getProperty("opportunities.nextdate.xpath"))).click();
+		click(locateElement("xpath", prop.getProperty("opportunities.nextdate.xpath")));
+
 		return this;
 
 	}
 
 	public OpportunityPage clickStageDropdown() {
-		WebElement stageDropdown = driver.findElement(By.xpath(prop.getProperty("opportunities.stagedropdown.xpath")));
-		stageDropdown.click();
+
+		click(locateElement("xpath", prop.getProperty("opportunities.stagedropdown.xpath")));
 		return this;
 
 	}
 
 	public OpportunityPage selectNeedAnalaysisValue() {
-		WebElement needAnalysisValue = driver
-				.findElement(By.xpath(prop.getProperty("opportunities.stagevalueNeedanalysis.xpath")));
-		needAnalysisValue.click();
+
+		click(locateElement("xpath", prop.getProperty("opportunities.stagevalueNeedanalysis.xpath")));
+
 		return this;
 	}
 
@@ -71,8 +82,8 @@ public class OpportunityPage extends ProjectSpecificMethods {
 	}
 
 	public OpportunityPage clickSaveButton() {
-		WebElement saveButton = driver.findElement(By.xpath(prop.getProperty("opportunities.savebtn.xpath")));
-		saveButton.click();
+	
+		click(locateElement("xpath", prop.getProperty("opportunities.savebtn.xpath")));
 		return this;
 	}
 

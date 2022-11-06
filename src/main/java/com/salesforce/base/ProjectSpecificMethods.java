@@ -19,9 +19,8 @@ import com.salesforce.utils.ReadExcel;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class ProjectSpecificMethods {
-	public static RemoteWebDriver driver;
-	public static WebDriverWait wait;
+public class ProjectSpecificMethods extends SeleniumBase {
+
 	public String excelFileName;
 	public static Properties prop_lang;
 	public static Properties prop;
@@ -39,21 +38,18 @@ public class ProjectSpecificMethods {
 		 * prop_lang = new Properties(); FileInputStream file1 = new FileInputStream(new
 		 * File("src/main/resources/"+language+".properties")); prop.load(file1);
 		 */
+		startApp(browser, url);
 
-		if (browser.equalsIgnoreCase("chrome")) {
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--disable-notifications");
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(options);
-		} else if (browser.equalsIgnoreCase("edge")) {
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
-		}
-		driver.manage().window().maximize();
-		driver.get(url);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
+		/*
+		 * if (browser.equalsIgnoreCase("chrome")) { ChromeOptions options = new
+		 * ChromeOptions(); options.addArguments("--disable-notifications");
+		 * WebDriverManager.chromedriver().setup(); driver = new ChromeDriver(options);
+		 * } else if (browser.equalsIgnoreCase("edge")) {
+		 * WebDriverManager.edgedriver().setup(); driver = new EdgeDriver(); }
+		 * driver.manage().window().maximize(); driver.get(url);
+		 * driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); wait = new
+		 * WebDriverWait(driver, Duration.ofSeconds(30));
+		 */
 	}
 
 	@AfterMethod(enabled = true)
