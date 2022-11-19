@@ -28,6 +28,7 @@ public class TC013_EditIndividuals extends ProjectSpecificMethods {
 		.clickIndividualsMenu()
 		.enterSearchText(lastName)
 		.clickRecentlyViewed()
+		.clickRefreshButton()
 		.selectFirstElement()
 		.clickEditButton()
 		.clickSalutationTextBox()

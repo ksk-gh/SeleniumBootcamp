@@ -33,6 +33,7 @@ public class TC014_DeleteIndividuals extends ProjectSpecificMethods {
 		.clickIndividualsMenu()
 		.enterSearchText(lastName)
 		.clickRecentlyViewed()
+.clickRefreshButton()
 		.selectFirstElement()
 		.clickDeleteButton()
 		.acceptDelete()

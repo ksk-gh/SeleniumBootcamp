@@ -30,7 +30,6 @@ public class TC002_EditOpportunity extends ProjectSpecificMethods{
 		.clickSalesLink()
 		.clickOpportunityLink()
 		.searchOpportunity(enterOpportunity)
-		//.clickOnOpportunityText()
 		.clickRefreshButton()
 		.clickOnFirstSearchElement()
 		.clickOnEditButton()
@@ -42,7 +41,8 @@ public class TC002_EditOpportunity extends ProjectSpecificMethods{
 		.selectInprogressDeliveryOption()
 		.enterDescription(enterDescription)
 		.clickSaveButton()
-		.getSnackBarMessage(verifySnackBarText)
+		.validateSnackBarMessage(verifySnackBarText)
+		.clickRefreshButton()
 		.validateStageText(stageName);
 		
 		

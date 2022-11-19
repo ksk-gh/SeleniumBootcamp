@@ -17,14 +17,6 @@ public class TC007_CreateWorkType extends ProjectSpecificMethods {
 	public void tc007(String username, String password, String projectName, String textArea, String shift,
 			String shiftTimings, String snackBarMsg) {
 
-		/*
-		 * if (driver.getTitle().contains("Developer Edition")) {
-		 * driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click(); }
-		 * driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
-		 * 
-		 * driver.findElement(By.xpath("//button[text()='View All']")).click();
-		 */
-
 		LoginPage loginPage = new LoginPage();
 
 		loginPage.enterUserName(username)

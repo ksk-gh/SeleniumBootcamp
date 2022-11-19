@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite" thread-count="5" verbose="10">
-<!-- 	<listeners>
-		<listener class-name="com.salesforce.utils.RetryListener"></listener>
-	</listeners> -->
-	<!-- <parameter name="url" value="https://login.salesforce.com/" /> <parameter 
-		name="browser" value="chrome" /> -->
-	<test thread-count="5" name="Opportunities" enabled="true"
+	<!-- <listeners> <listener class-name="com.salesforce.utils.RetryListener"></listener> 
+		</listeners> <parameter name="url" value="https://login.salesforce.com/" 
+		/> <parameter name="browser" value="chrome" /> -->
+	<test thread-count="5" name="Opportunities" enabled="false"
 		parallel="false">
 		<classes>
 			<class name="com.salesforce.cases.TC001_CreateOpportunity" />
-			<!-- <class name="com.salesforce.cases.TC002_EditOpportunity" />
-			<class name="com.salesforce.cases.TC003_DeleteOpportunity" /> -->
+			<class name="com.salesforce.cases.TC002_EditOpportunity" />
+			<class name="com.salesforce.cases.TC003_DeleteOpportunity" />
 		</classes>
 	</test>
 	<test name="Accounts" enabled="false">
@@ -22,18 +20,17 @@
 		</classes>
 	</test>
 
-	<test name="WorkTypes" enabled="false">
+	<test name="WorkTypes" enabled="true">
 		<classes>
 			<class name="com.salesforce.cases.TC007_CreateWorkType" />
-			<class name="com.salesforce.cases.TC008_EditWorkTypeNegative" />
-			<class name="com.salesforce.cases.TC009_EditWorkType" />
-			<class name="com.salesforce.cases.TC010_DeleteWorkType" />
-			<class
-				name="com.salesforce.cases.TC011_WorkTypeAlertVerification" />
+			<class name="com.salesforce.cases.TC008_EditWorkTypeNegative" /> 
+			<class name="com.salesforce.cases.TC009_EditWorkType" /> 
+			<class name="com.salesforce.cases.TC010_DeleteWorkType"/> 
+			<class name="com.salesforce.cases.TC011_WorkTypeAlertVerification" />
 		</classes>
 	</test>
 
-	<test name="Individuals" enabled="false">
+	<test name="Individuals" enabled="true">
 		<classes>
 			<class name="com.salesforce.cases.TC012_CreateIndividuals" />
 			<class name="com.salesforce.cases.TC013_EditIndividuals" />
@@ -43,9 +40,9 @@
 		</classes>
 	</test>
 
-	<test name="Tasks" enabled="false">
+	<test name="Tasks" enabled="true">
 		<classes>
-		<class name="com.salesforce.cases.TC016_CreateTask"/>
+			<class name="com.salesforce.cases.TC016_CreateTask" />
 		</classes>
 	</test>
 
