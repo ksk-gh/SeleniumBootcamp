@@ -47,13 +47,12 @@ public class SeleniumBase extends ReadExcel implements Browser {
 	}
 
 	public void click(WebElement ele) {
-
-		String text = " ";
-
+		String text=" ";
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			wait.until(ExpectedConditions.elementToBeClickable(ele));
 			text = ele.getText();
+			System.out.println(text);
 			ele.click();
 		} catch (StaleElementReferenceException e) {
 			throw new RuntimeException();
@@ -202,7 +201,7 @@ public class SeleniumBase extends ReadExcel implements Browser {
 
 		}
 
-		String text = "";
+		// String text = "";
 		try {
 			try {
 				driver.executeScript("arguments[0].click()", ele);
@@ -264,7 +263,7 @@ public class SeleniumBase extends ReadExcel implements Browser {
 
 		}
 
-		String text = "";
+		// String text = null;
 		try {
 			try {
 				driver.executeScript("arguments[0].click()", ele);
