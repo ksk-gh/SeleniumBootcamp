@@ -41,8 +41,7 @@ public interface Browser {
 
 	public void clearAndTypeWithEnter(WebElement ele, String value);
 
-	public void clickUsingAction(WebElement ele);
-
+	public void switchToFrame(WebElement value);
 	/*
 	 * public void switchToFrame(WebElement value);
 	 * 

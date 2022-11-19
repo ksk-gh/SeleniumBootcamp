@@ -31,4 +31,9 @@ public class HomePage extends ProjectSpecificMethods {
 		return new IndividualsPage();
 	}
 
+	public DashboardPage clickDashboardLink() {
+		clickUsingJs(locateElement("xpath", prop.getProperty("home.individualslink.xpath")));
+		return new DashboardPage();
+	}
+
 }
