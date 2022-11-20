@@ -41,13 +41,13 @@ public interface Browser {
 
 	public void clearAndTypeWithEnter(WebElement ele, String value);
 
-	public void switchToFrame(WebElement value);
 	/*
-	 * public void switchToFrame(WebElement value);
-	 * 
-	 * public void switchToFrame(String value);
-	 * 
-	 * public void defaultContent();
+	 * public void switchToFrame(WebElement value); public void switchToFrame(String
+	 * idOrName);
+	 */
+
+	// public void switchToFrame(WebElement value);
+	/* public void defaultContent();
 	 * 
 	 * public void verifyURL();
 	 * 

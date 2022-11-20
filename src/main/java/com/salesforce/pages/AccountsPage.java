@@ -224,8 +224,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 	public AccountsPage deleteSnackBarMessage(String noItems) {
 		waitUntilElementLocated("xpath", prop.getProperty("opportunities.snackbarmsg.xpath"));
 		WebElement noItemsMsg = driver.findElement(By.xpath("//span[text()='" + noItems + "']"));
-		boolean displayed = verifyDisplayed(noItemsMsg);
-		Assert.assertTrue(displayed);
+		Assert.assertTrue(verifyDisplayed(noItemsMsg));
 		return this;
 	}
 

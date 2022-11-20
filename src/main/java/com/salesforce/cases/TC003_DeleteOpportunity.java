@@ -11,6 +11,11 @@ public class TC003_DeleteOpportunity extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC003";
+		testCaseName="TC003_DeleteOpportunity";
+		testDescription="Login to Salesforce and Delete an opportunity";
+		testNodes="Opportunities";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

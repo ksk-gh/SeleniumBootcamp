@@ -6,15 +6,15 @@ import org.testng.annotations.Test;
 import com.salesforce.base.ProjectSpecificMethods;
 import com.salesforce.pages.LoginPage;
 
-public class TC015_CreateIndividualsWithoutLastName extends ProjectSpecificMethods {
+public class TC017_CreateDashboard extends ProjectSpecificMethods {
 
 	@BeforeTest
 	public void setData() {
-		excelFileName = "TC015";
+		excelFileName = "TC016";
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc015(String username, String password,String firstName, String errorText) {
+	public void tc015(String username, String password,String subject, String status,String snackmsg) throws InterruptedException {
 		//String errorText = "Complete this field.";
 
 		
@@ -24,13 +24,10 @@ public class TC015_CreateIndividualsWithoutLastName extends ProjectSpecificMetho
 		.enterPassword(password)
 		.clickLogin()
 		.clickAppLauncher()
-		.clickViewAll()
-		.clickIndividualsLink()
-		.clickDownArrow()
-		.clickNewIndividualLink()
-		.enterFirstName(firstName)
-		.clickSaveButton()
-		.validateLastNameErrormessage(errorText);
-
-	}
+		.clickDashboardLink()
+		.clickNewDashboard();
+		
+		
+		}
+	
 }

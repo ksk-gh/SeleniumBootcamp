@@ -10,6 +10,11 @@ public class TC005_EditAccount extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC005";
+		testCaseName="TC005_EditAccounts";
+		testDescription="Login to Salesforce and Edit an Accounts";
+		testNodes="Accounts";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

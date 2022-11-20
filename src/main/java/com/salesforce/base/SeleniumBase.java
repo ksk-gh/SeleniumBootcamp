@@ -1,13 +1,17 @@
 package com.salesforce.base;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -18,44 +22,56 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.salesforce.utils.ReadExcel;
+//import com.salesforce.utils.ReadExcel;
+import com.salesforce.utils.Reporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class SeleniumBase extends ReadExcel implements Browser {
+//public class SeleniumBase extends ReadExcel implements Browser {
+
+public class SeleniumBase extends Reporter implements Browser {
 
 	public static RemoteWebDriver driver;
 	public static WebDriverWait wait;
 	public Properties prop;
 
 	public void startApp(String browser, String url) {
-		if (browser.equalsIgnoreCase("chrome")) {
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--disable-notifications");
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(options);
-		} else if (browser.equalsIgnoreCase("edge")) {
-			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
+		try {
+			if (browser.equalsIgnoreCase("chrome")) {
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--disable-notifications");
+				WebDriverManager.chromedriver().setup();
+				driver = new ChromeDriver(options);
+			} else if (browser.equalsIgnoreCase("edge")) {
+				WebDriverManager.edgedriver().setup();
+				driver = new EdgeDriver();
+			}
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+			wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			driver.get(url);
+			reportStep("The Browser" + browser + "has been launched successfully", "PASS");
+		} catch (WebDriverException e) {
+			reportStep("The Browser" + browser + "could not be launched", "FAIL");
+
 		}
-		driver.manage().window().maximize();
-		driver.get(url);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
 	}
 
 	public void click(WebElement ele) {
-		String text=" ";
+		String text = " ";
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			wait.until(ExpectedConditions.elementToBeClickable(ele));
 			text = ele.getText();
 			System.out.println(text);
 			ele.click();
-		} catch (StaleElementReferenceException e) {
-			throw new RuntimeException();
+			reportStep("The element " + text + " is clicked", "PASS");
+		} catch (InvalidElementStateException e) {
+			reportStep("The element: " + text + " could not be clicked", "FAIL");
+		} catch (WebDriverException e) {
+			reportStep("Unknown exception occured while clicking in the field :", "FAIL");
 		}
-
 	}
 
 	public WebElement locateElement(String locator, String locValue) {
@@ -73,12 +89,15 @@ public class SeleniumBase extends ReadExcel implements Browser {
 				return driver.findElement(By.className(locValue));
 			case ("tag"):
 				return driver.findElement(By.tagName(locValue));
+			default:
+				System.err.println("Locator is not valid");
+				break;
+
 			}
 		} catch (NoSuchElementException e) {
-			// reportStep("The element with locator "+locator+" not found.","FAIL");
+			reportStep("The element with locator " + locator + " not found.", "FAIL");
 		} catch (WebDriverException e) {
-			// reportStep("Unknown exception occured while finding "+locator+" with the
-			// value "+locValue, "FAIL");
+			reportStep("Unknown exception occured while finding " + locator + " with the value " + locValue, "FAIL");
 		}
 		return null;
 	}
@@ -99,15 +118,13 @@ public class SeleniumBase extends ReadExcel implements Browser {
 		try {
 			ele.clear();
 			ele.sendKeys(data);
-			// String x = ""+ele;
-			// reportStep("The data: "+data+" entered successfully in the field :"+ele,
-			// "PASS");
+
+			//String x = "" + ele;
+			reportStep("The data: " + data + " entered successfully in the field :" + ele, "PASS");
 		} catch (InvalidElementStateException e) {
-			// reportStep("The data: "+data+" could not be entered in the field
-			// :"+ele,"FAIL");
+			reportStep("The data: " + data + " could not be entered in the field:" + ele, "FAIL");
 		} catch (WebDriverException e) {
-			// reportStep("Unknown exception occured while entering "+data+" in the field
-			// :"+ele, "FAIL");
+			reportStep("Unknown exception occured while entering " + data + " in the field:" + ele, "FAIL");
 		}
 	}
 
@@ -116,15 +133,12 @@ public class SeleniumBase extends ReadExcel implements Browser {
 		try {
 			ele.clear();
 			ele.sendKeys(data, Keys.ENTER);
-			// String x = ""+ele;
-			// reportStep("The data: "+data+" entered successfully in the field :"+ele,
-			// "PASS");
+			//String x = "" + ele;
+			reportStep("The data: " + data + " entered successfully in the field :" + ele, "PASS");
 		} catch (InvalidElementStateException e) {
-			// reportStep("The data: "+data+" could not be entered in the field
-			// :"+ele,"FAIL");
+			reportStep("The data: " + data + " could not be entered in the field:" + ele, "FAIL");
 		} catch (WebDriverException e) {
-			// reportStep("Unknown exception occured while entering "+data+" in the field
-			// :"+ele, "FAIL");
+			reportStep("Unknown exception occured while entering " + data + " in the field:" + ele, "FAIL");
 		}
 	}
 
@@ -133,15 +147,14 @@ public class SeleniumBase extends ReadExcel implements Browser {
 		try {
 			ele.clear();
 			ele.sendKeys(data, Keys.TAB);
-			// String x = ""+ele;
-			// reportStep("The data: "+data+" entered successfully in the field :"+ele,
-			// "PASS");
+
+			String x = "" + ele;
+			reportStep("The data: " + data + " entered successfully in the field :" + ele, //
+					"PASS");
 		} catch (InvalidElementStateException e) {
-			// reportStep("The data: "+data+" could not be entered in the field
-			// :"+ele,"FAIL");
+			reportStep("The data: " + data + " could not be entered in the field:" + ele, "FAIL");
 		} catch (WebDriverException e) {
-			// reportStep("Unknown exception occured while entering "+data+" in the field
-			// :"+ele, "FAIL");
+			reportStep("Unknown exception occured while entering " + data + " in the field :" + ele, "FAIL");
 		}
 	}
 
@@ -149,12 +162,14 @@ public class SeleniumBase extends ReadExcel implements Browser {
 	public boolean verifyDisplayed(WebElement ele) {
 		try {
 			if (ele.isDisplayed()) {
+				 reportStep("The element " + ele + " is visible", "PASS");
+
 				return true;
 			} else {
-				// reportStep("The element " + ele + " is not visible", "warnings");
+				 reportStep("The element " + ele + " is not visible", "warnings");
 			}
 		} catch (WebDriverException e) {
-			// reportStep("WebDriverException : \n" + e.getMessage(), "fail");
+			reportStep("WebDriverException : \n" + e.getMessage(), "fail");
 		}
 		return false;
 	}
@@ -163,8 +178,11 @@ public class SeleniumBase extends ReadExcel implements Browser {
 	public void close() {
 		try {
 			driver.close();
+			reportStep("Browser is closed", "info");
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			reportStep("Browser cannot be closed " + e.getMessage(), "fail");
+
 		}
 	}
 
@@ -172,8 +190,10 @@ public class SeleniumBase extends ReadExcel implements Browser {
 	public void quit() {
 		try {
 			driver.quit();
+			reportStep("Browser is closed", "info");
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			reportStep("Browser cannot be closed " + e.getMessage(), "fail");
 		}
 	}
 
@@ -183,11 +203,9 @@ public class SeleniumBase extends ReadExcel implements Browser {
 			ele.clear();
 			ele.sendKeys("", "", data);
 		} catch (ElementNotInteractableException e) {
-			// reportStep("The Element " + ele + " is not Interactable \n" + e.getMessage(),
-			// "fail");
+			reportStep("The Element " + ele + " is not Interactable \n" + e.getMessage(),"fail");
 		} catch (WebDriverException e) {
-			// reportStep("The Element " + ele + " is not Interactable \n" + e.getMessage(),
-			// "fail");
+			reportStep("The Element " + ele + " is not Interactable \n" + e.getMessage(),"fail");
 		}
 
 	}
@@ -199,7 +217,7 @@ public class SeleniumBase extends ReadExcel implements Browser {
 
 		}
 
-		// String text = "";
+		String text = "";
 		try {
 			try {
 				driver.executeScript("arguments[0].click()", ele);
@@ -221,20 +239,21 @@ public class SeleniumBase extends ReadExcel implements Browser {
 					driver.executeScript("arguments[0].click()", ele);
 			}
 		} catch (StaleElementReferenceException e) {
-			// reportStep("The Element " + text + " could not be clicked due to:" +
-			// e.getMessage(), "fail");
+			reportStep("The Element " + text + " could not be clicked due to:" +e.getMessage(), "fail");
 		} catch (WebDriverException e) {
-			// reportStep("The Element " + ele + " could not be clicked due to: " +
-			// e.getMessage(), "fail");
+			reportStep("The Element " + ele + " could not be clicked due to: " +e.getMessage(), "fail");
 		} catch (Exception e) {
-			// reportStep("The Element " + ele + " could not be clicked due to: " +
-			// e.getMessage(), "fail");
+			 reportStep("The Element " + ele + " could not be clicked due to: " +e.getMessage(), "fail");
 		}
 	}
 
 	public void getEnteredText(WebElement ele) {
 
-		ele.getAttribute("value");
+		try {
+			ele.getAttribute("value");
+		} catch (Exception e) {
+		 reportStep("The Element " + ele + " could not get the text " +e.getMessage(), "fail");
+		}
 
 	}
 
@@ -244,10 +263,10 @@ public class SeleniumBase extends ReadExcel implements Browser {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			wait.until(ExpectedConditions.visibilityOf(ele));
 			text = ele.getText();
+			reportStep("", "PASS");
 
 		} catch (WebDriverException e) {
-			// reportStep("Unknown exception occured while verifying the Text \n" +
-			// e.getMessage(), "fail");
+			reportStep("Unknown exception occured while verifying the Text \n" +e.getMessage(), "fail");
 		}
 
 		return text;
@@ -261,7 +280,7 @@ public class SeleniumBase extends ReadExcel implements Browser {
 
 		}
 
-		// String text = null;
+		String text = null;
 		try {
 			try {
 				driver.executeScript("arguments[0].click()", ele);
@@ -283,14 +302,12 @@ public class SeleniumBase extends ReadExcel implements Browser {
 					driver.executeScript("arguments[0].click()", ele);
 			}
 		} catch (StaleElementReferenceException e) {
-			// reportStep("The Element " + text + " could not be clicked due to:" +
-			// e.getMessage(), "fail");
+
+			reportStep("The Element " + text + " could not be clicked due to:" + e.getMessage(), "fail");
 		} catch (WebDriverException e) {
-			// reportStep("The Element " + ele + " could not be clicked due to: " +
-			// e.getMessage(), "fail");
+			reportStep("The Element " + ele + " could not be clicked due to: " +e.getMessage(), "fail");
 		} catch (Exception e) {
-			// reportStep("The Element " + ele + " could not be clicked due to: " +
-			// e.getMessage(), "fail");
+			reportStep("The Element " + ele + " could not be clicked due to: " +e.getMessage(), "fail");
 		}
 
 	}
@@ -298,7 +315,12 @@ public class SeleniumBase extends ReadExcel implements Browser {
 	public void waitUntilStalenessof(WebElement ele) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		wait.until(ExpectedConditions.stalenessOf(ele));
+		try {
+			wait.until(ExpectedConditions.stalenessOf(ele));
+		} catch (WebDriverException e) {
+			reportStep("The Element " + ele + " is not staled " +e.getMessage(), "fail");
+
+		}
 
 	}
 
@@ -320,7 +342,7 @@ public class SeleniumBase extends ReadExcel implements Browser {
 				return By.tagName(locValue);
 			}
 		} catch (NoSuchElementException e) {
-			// reportStep("The element with locator "+locator+" not found.","FAIL");
+			reportStep("The element with locator "+locator+" not found.","FAIL");
 		}
 		return null;
 	}
@@ -328,34 +350,52 @@ public class SeleniumBase extends ReadExcel implements Browser {
 	public void waitUntilElementLocated(String locator, String locatorValue) {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		String loc = locator.toLowerCase();
-		switch (loc) {
-		case "id":
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locatorValue)));
-		case "xpath":
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locatorValue)));
+		try {
+			switch (loc) {
+			case "id":
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locatorValue)));
+			case "xpath":
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locatorValue)));
+			}
+		} catch (Exception e) {
+			reportStep("The element with locator "+locator+" not found.","FAIL");
+
 		}
 	}
 
 	public void waitUntilInvisibilityOfElement(String locator, String locatorValue) {
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		String loc = locator.toLowerCase();
-		switch (loc) {
-		case "id":
-			// wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(locatorValue)));
-			// wait.until(ExpectedConditions.invisibilityOf(By.id(locatorValue)));
+		try {
+			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			String loc = locator.toLowerCase();
+			switch (loc) {
+			case "id":
 
-			wait.until(ExpectedConditions.invisibilityOf(locateElement(locator, locatorValue)));
+				wait.until(ExpectedConditions.invisibilityOf(locateElement(locator, locatorValue)));
 
-		case "xpath":
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locatorValue)));
-			// wait.until(ExpectedConditions.invisibilityOfElementLocated(locateElement(locator,
-			// locatorValue)));
+			case "xpath":
+				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locatorValue)));
+			}
+		} catch (Exception e) {
+			reportStep("The element is not disappeared.","FAIL");
 
 		}
 	}
 
 	public void switchToFrame(WebElement value) {
-		
+
+	}
+
+	@Override
+	public long takeSnap() {
+		long number = (long) Math.floor(Math.random() * 90000000) + 10000000L;
+		File src = driver.getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(src, new File(folder + "/" + number + ".png"));
+		} catch (IOException e) {
+
+		}
+
+		return number;
 	}
 
 }

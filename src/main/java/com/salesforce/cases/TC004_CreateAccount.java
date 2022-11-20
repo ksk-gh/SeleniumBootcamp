@@ -11,6 +11,11 @@ public class TC004_CreateAccount extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC004";
+		testCaseName="TC004_CreateAccounts";
+		testDescription="Login to Salesforce and Create an Accounts";
+		testNodes="Accounts";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

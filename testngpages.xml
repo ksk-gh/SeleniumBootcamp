@@ -4,7 +4,7 @@
 	<!-- <listeners> <listener class-name="com.salesforce.utils.RetryListener"></listener> 
 		</listeners> <parameter name="url" value="https://login.salesforce.com/" 
 		/> <parameter name="browser" value="chrome" /> -->
-	<test thread-count="5" name="Opportunities" enabled="false"
+	<test thread-count="5" name="Opportunities" enabled="true"
 		parallel="false">
 		<classes>
 			<class name="com.salesforce.cases.TC001_CreateOpportunity" />
@@ -12,7 +12,7 @@
 			<class name="com.salesforce.cases.TC003_DeleteOpportunity" />
 		</classes>
 	</test>
-	<test name="Accounts" enabled="false">
+	<test name="Accounts" enabled="true">
 		<classes>
 			<class name="com.salesforce.cases.TC004_CreateAccount" />
 			<class name="com.salesforce.cases.TC005_EditAccount" />

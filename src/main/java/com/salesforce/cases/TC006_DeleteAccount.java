@@ -10,6 +10,11 @@ public class TC006_DeleteAccount extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC006";
+		testCaseName="TC006_DeleteAccounts";
+		testDescription="Login to Salesforce and Delete an Accounts";
+		testNodes="Accounts";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

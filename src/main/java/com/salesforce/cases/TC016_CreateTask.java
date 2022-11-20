@@ -18,7 +18,6 @@ public class TC016_CreateTask extends ProjectSpecificMethods{
 	public void tc015(String username, String password,String subject, String status,String snackmsg) throws InterruptedException {
 		//String errorText = "Complete this field.";
 
-		
 		LoginPage login = new LoginPage();
 
 		login.enterUserName(username)
@@ -34,9 +33,6 @@ public class TC016_CreateTask extends ProjectSpecificMethods{
 		.selectStatusOption(status)
 		.clickSaveButton()
 		.validateSnackBarMsg(snackmsg);
-		
-		
-		
-		
+
 		}
 }

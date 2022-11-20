@@ -10,7 +10,12 @@ public class TC001_CreateOpportunity extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC001";
-	}
+		testCaseName="TC001_CreateOpportunity";
+		testDescription="Login to Salesforce and Create an opportunity";
+		testNodes="Opportunities";
+		category="Regression";
+		author="KSK";
+		}
 
 	@Test(dataProvider = "Dynamic_Data")
 
