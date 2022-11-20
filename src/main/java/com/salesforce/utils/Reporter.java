@@ -15,66 +15,74 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 public abstract class Reporter {
 	public static ExtentHtmlReporter htmlReporter;
 	public static ExtentReports extent;
-	public static ExtentTest test, node;
+	public static ExtentTest test, suiteTest;
 	public static File folder;
 	public String testCaseName, testNodes, testDescription, category, author;
-	
-public void createTestReport() {
-	
-String date=new SimpleDateFormat("dd-MM-yyyy").format(new Date());	
 
-folder=new File(".\\reports\\"+date);
-
-if(!folder.exists()) {
-	folder.mkdir();
-}
-extent= new ExtentReports();
-htmlReporter = new ExtentHtmlReporter(new File(folder+"\\index.html"));
-htmlReporter.setAppendExisting(true);
-extent.attachReporter(htmlReporter);
-}
-
-
-public ExtentTest createTestcaseEntry(String testcase,String testDescription,String author,String category) {
-	
-test=extent.createTest(testcase,testDescription);
-test.assignAuthor(author);
-test.assignCategory(category);
-return test;
-
-}
-
-public ExtentTest startIteration(String node) {
-	test.createNode(node);
-	return test;
-}
-	
-
-public abstract long takeSnap();
-
-
-public void reportStep(String step,String status) {
-	long snapNumber=takeSnap();
-	MediaEntityModelProvider snap=null;
-	try {
-		snap=MediaEntityBuilder.createScreenCaptureFromPath(folder+"\\"+snapNumber+".png").build();
-	} catch (IOException e) {
-	}
-	if(status.equalsIgnoreCase("PASS")) {
+	// start testsuite
+	public void createTestReport() {
+		//String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 		
-		test.log(Status.PASS,step,snap);
-	}else if(status.equalsIgnoreCase("FAIL")) {
-		test.log(Status.FAIL,step,snap);
-	}else if(status.equalsIgnoreCase("WARNING")) {
-		test.log(Status.WARNING,step,snap);
+		String date = new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date());
+	//	String date1 = new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date());
+		folder = new File(".\\reports\\" + date);
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+		extent = new ExtentReports();
+		htmlReporter = new ExtentHtmlReporter(new File(folder + "\\result.html"));
+		htmlReporter.setAppendExisting(true);
+		extent.attachReporter(htmlReporter);
 	}
-	else if(status.equalsIgnoreCase("INFO")) {
-		test.log(Status.INFO,step,snap);
-	}
-}
 
-public void publishReport() {
-	extent.flush();
-}
+	// create test module
+	public ExtentTest createTestcaseEntry(String testcase, String testDescription, String author, String category) {
+		suiteTest = extent.createTest(testcase, testDescription);
+		
+		suiteTest.assignAuthor(author); 
+		suiteTest.assignCategory(category);
+		 
+		return suiteTest;
+	}
+
+	// create test case or node
+	public ExtentTest startIteration(String testNodes) {
+		test = suiteTest.createNode(testNodes);
+		return test;
+	}
+
+	public abstract long takeSnap();
+
+	public void reportStep(String step, String status, boolean snapshot) {
+		long snapNumber = takeSnap();
+		MediaEntityModelProvider snap = null;
+		if (snapshot && !status.equalsIgnoreCase("info")) {
+			try {
+			//	snap = MediaEntityBuilder.createScreenCaptureFromPath("./../../" + folder + "/" + snapNumber + ".png").build();
+				snap = MediaEntityBuilder.createScreenCaptureFromPath(snapNumber + ".png").build();
+			
+			} catch (IOException e) {
+			}
+		}
+		if (status.equalsIgnoreCase("PASS")) {
+
+			test.log(Status.PASS, step, snap);
+		} else if (status.equalsIgnoreCase("FAIL")) {
+			test.log(Status.FAIL, step, snap);
+		} else if (status.equalsIgnoreCase("WARNING")) {
+			test.log(Status.WARNING, step, snap);
+		} else if (status.equalsIgnoreCase("INFO")) {
+			test.log(Status.INFO, step, snap);
+		}
+	}
+
+	public void reportStep(String desc, String status) {
+		reportStep(desc, status, true);
+	}
+	
+	//publish report
+	public void publishReport() {
+		extent.flush();
+	}
 
 }

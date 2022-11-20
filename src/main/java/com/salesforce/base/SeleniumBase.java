@@ -50,21 +50,26 @@ public class SeleniumBase extends Reporter implements Browser {
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 			wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			driver.get(url);
-			reportStep("The Browser" + browser + "has been launched successfully", "PASS");
+			reportStep("The Browser " + browser + " has been launched successfully", "PASS");
 		} catch (WebDriverException e) {
-			reportStep("The Browser" + browser + "could not be launched", "FAIL");
+			reportStep("The Browser " + browser + " could not be launched", "FAIL");
 
 		}
 
 	}
 
 	public void click(WebElement ele) {
-		String text = " ";
+		String text = null;
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			wait.until(ExpectedConditions.elementToBeClickable(ele));
 			text = ele.getText();
-			System.out.println(text);
+			
+			if(text.isEmpty()) {
+				text=ele.getAttribute("value");
+			}
+			System.out.println("Test is :"+text);
+
 			ele.click();
 			reportStep("The element " + text + " is clicked", "PASS");
 		} catch (InvalidElementStateException e) {
@@ -106,6 +111,7 @@ public class SeleniumBase extends Reporter implements Browser {
 	public void clear(WebElement ele) {
 		try {
 			ele.clear();
+			reportStep("The text in the " + ele + " is cleared.", "info");
 
 		} catch (InvalidElementStateException e) {
 		} catch (WebDriverException e) {
@@ -202,6 +208,7 @@ public class SeleniumBase extends Reporter implements Browser {
 			wait.until(ExpectedConditions.visibilityOf(ele));
 			ele.clear();
 			ele.sendKeys("", "", data);
+			reportStep("The " + data + " is entered", "pass");
 		} catch (ElementNotInteractableException e) {
 			reportStep("The Element " + ele + " is not Interactable \n" + e.getMessage(),"fail");
 		} catch (WebDriverException e) {
@@ -237,6 +244,8 @@ public class SeleniumBase extends Reporter implements Browser {
 				}
 				if (!bFound)
 					driver.executeScript("arguments[0].click()", ele);
+				reportStep("The " + ele + " is clicked", "pass");
+
 			}
 		} catch (StaleElementReferenceException e) {
 			reportStep("The Element " + text + " could not be clicked due to:" +e.getMessage(), "fail");
@@ -250,7 +259,9 @@ public class SeleniumBase extends Reporter implements Browser {
 	public void getEnteredText(WebElement ele) {
 
 		try {
-			ele.getAttribute("value");
+			String attributeText = ele.getAttribute("value");
+			 reportStep("The entered text" + attributeText + " is retrived from the "+ele , "info");
+
 		} catch (Exception e) {
 		 reportStep("The Element " + ele + " could not get the text " +e.getMessage(), "fail");
 		}
@@ -263,7 +274,7 @@ public class SeleniumBase extends Reporter implements Browser {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			wait.until(ExpectedConditions.visibilityOf(ele));
 			text = ele.getText();
-			reportStep("", "PASS");
+			reportStep("The "+text+" is fetched from the "+ele, "PASS");
 
 		} catch (WebDriverException e) {
 			reportStep("Unknown exception occured while verifying the Text \n" +e.getMessage(), "fail");

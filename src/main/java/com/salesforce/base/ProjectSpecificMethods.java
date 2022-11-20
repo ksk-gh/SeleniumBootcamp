@@ -22,7 +22,7 @@ public class ProjectSpecificMethods extends SeleniumBase {
 	public static Properties prop;
 
 	@BeforeSuite
-	public void init() {
+	public void initSuite() {
 		createTestReport();
 	}
 	
@@ -35,12 +35,12 @@ public class ProjectSpecificMethods extends SeleniumBase {
 	
 	@BeforeMethod
 	public void BeforeMethod() throws IOException {
-		startIteration("Login");
 		prop = new Properties();
 		FileInputStream file = new FileInputStream(new File("src/main/resources/AppConfig.properties"));
 		prop.load(file);
 		String url = prop.getProperty("appURL");
 		String browser = prop.getProperty("browser");
+		test=startIteration(testNodes);
 		startApp(browser, url);
 	}
 
@@ -56,14 +56,6 @@ public class ProjectSpecificMethods extends SeleniumBase {
 		
 		// quit();
 	}
-	
-
-	
-	/*
-	 * @BeforeTest public void setUpTests() {
-	 * 
-	 * //later }
-	 */
 	
 	
 	public void invoke() {
