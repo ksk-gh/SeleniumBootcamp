@@ -11,6 +11,11 @@ public class TC008_EditWorkTypeNegative extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC008";
+		testCaseName="TC008_EditWorkTypeNegative";
+		testDescription="Login to Salesforce and Edit worktype Negative scenario";
+		testNodes="Worktypes";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

@@ -11,6 +11,11 @@ public class TC012_CreateIndividuals extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC012";
+		testCaseName="TC012_CreateIndividual";
+		testDescription="Login to Salesforce and Create an Individuals";
+		testNodes="Individuals";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

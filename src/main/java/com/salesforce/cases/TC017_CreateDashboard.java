@@ -10,11 +10,16 @@ public class TC017_CreateDashboard extends ProjectSpecificMethods {
 
 	@BeforeTest
 	public void setData() {
-		excelFileName = "TC016";
+		excelFileName = "TC017";
+		testCaseName="TC017_CreateDashboards";
+		testDescription="Login to Salesforce and Create Dashboards";
+		testNodes="Tasks";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc015(String username, String password,String subject, String status,String snackmsg) throws InterruptedException {
+	public void tc017(String username, String password,String subject, String status,String snackmsg) throws InterruptedException {
 		//String errorText = "Complete this field.";
 
 		

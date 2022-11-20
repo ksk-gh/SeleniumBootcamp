@@ -11,6 +11,11 @@ public class TC007_CreateWorkType extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC007";
+		testCaseName="TC007_CreateWorkType";
+		testDescription="Login to Salesforce and create a worktype";
+		testNodes="Worktypes";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

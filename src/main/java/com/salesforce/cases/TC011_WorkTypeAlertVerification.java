@@ -11,6 +11,11 @@ public class TC011_WorkTypeAlertVerification extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC011";
+		testCaseName="TC011_WorkTypeAlertVerification";
+		testDescription="Login to Salesforce and Worktype Alert Verification";
+		testNodes="Worktypes";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

@@ -11,6 +11,11 @@ public class TC015_CreateIndividualsWithoutLastName extends ProjectSpecificMetho
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC015";
+		testCaseName="TC015_CreateIndividualsWithoutLastName";
+		testDescription="Login to Salesforce and Create an Individuals without Lastname and error validations";
+		testNodes="Individuals";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)

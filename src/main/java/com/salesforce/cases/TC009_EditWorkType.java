@@ -10,6 +10,12 @@ public class TC009_EditWorkType extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC009";
+		testCaseName="TC009_EditWorkType";
+		testDescription="Login to Salesforce and Edit worktype Positive scenario";
+		testNodes="Worktypes";
+		category="Regression";
+		author="KSK";
+		
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

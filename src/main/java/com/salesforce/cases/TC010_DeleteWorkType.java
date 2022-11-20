@@ -11,6 +11,11 @@ public class TC010_DeleteWorkType extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC010";
+		testCaseName="TC010_DeleteWorkType";
+		testDescription="Login to Salesforce and Delete a worktype";
+		testNodes="Worktypes";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)

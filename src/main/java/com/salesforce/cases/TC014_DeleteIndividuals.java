@@ -12,6 +12,11 @@ public class TC014_DeleteIndividuals extends ProjectSpecificMethods {
 	@BeforeTest
 	public void setData() {
 		excelFileName = "TC014";
+		testCaseName="TC014_DeleteIndividual";
+		testDescription="Login to Salesforce and Delete an Individuals";
+		testNodes="Individuals";
+		category="Regression";
+		author="KSK";
 	}
 
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
