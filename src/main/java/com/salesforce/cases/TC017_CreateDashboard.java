@@ -19,8 +19,7 @@ public class TC017_CreateDashboard extends ProjectSpecificMethods {
 	}
 
 	@Test(dataProvider = "Dynamic_Data",enabled = true)
-	public void tc017(String username, String password,String subject, String status,String snackmsg) throws InterruptedException {
-		//String errorText = "Complete this field.";
+	public void tc017(String username, String password,String dashbaordName) throws InterruptedException {
 
 		
 		LoginPage login = new LoginPage();
@@ -29,8 +28,11 @@ public class TC017_CreateDashboard extends ProjectSpecificMethods {
 		.enterPassword(password)
 		.clickLogin()
 		.clickAppLauncher()
-		.clickDashboardLink()
-		.clickNewDashboard();
+		.clickViewAll()
+		.clickDashboardLink()		
+		.clickNewDashboard()
+		.switchToIFrame()
+		.enterDashboardName(dashbaordName);
 		
 		
 		}

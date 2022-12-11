@@ -20,15 +20,6 @@ public class TC006_DeleteAccount extends ProjectSpecificMethods {
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc006(String userName, String password, String accountName, String noItemsText) throws InterruptedException {
 
-		/*
-		 * if (driver.getTitle().contains("Developer Edition")) {
-		 * driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click(); }
-		 * 
-		 * // String noItemsText = "No items to display."; // String
-		 * accountName="Sankarakarthikeyan";
-		 * 
-		 * // 2. Click on toggle menu button from the left corner
-		 */
 		LoginPage login = new LoginPage();
 		
 		login.enterUserName(userName)

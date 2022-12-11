@@ -22,10 +22,11 @@ public class TC014_DeleteIndividuals extends ProjectSpecificMethods {
 	@Test(dataProvider = "Dynamic_Data", enabled = true)
 	public void tc014(String username, String password, String lastName) throws InterruptedException {
 
-		// String firstName = "Sankarakarthi";
-		if (driver.getTitle().contains("Developer Edition")) {
-			driver.findElement(By.xpath("//*[@class='switch-to-lightning']")).click();
-		}
+		/*
+		 * if (getDriver().getTitle().contains("Developer Edition")) {
+		 * getDriver().findElement(By.xpath("//*[@class='switch-to-lightning']")).click(
+		 * ); }
+		 */
 
 		LoginPage login = new LoginPage();
 

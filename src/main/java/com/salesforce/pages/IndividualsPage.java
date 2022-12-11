@@ -71,7 +71,7 @@ public class IndividualsPage extends ProjectSpecificMethods {
 
 	public IndividualsPage selectSalutationOption() {
 		String salutation = "Mr.";
-		WebElement salutationOption = driver.findElement(By.xpath("//a[@title='" + salutation + "']"));
+		WebElement salutationOption = getDriver().findElement(By.xpath("//a[@title='" + salutation + "']"));
 		click(salutationOption);
 		return this;
 	}

@@ -27,7 +27,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 	}
 
 	public AccountsPage selectOwnershipOption(String ownership) {
-		WebElement publicDropdownValue = driver.findElement(By.xpath("//*[@data-value='" + ownership + "']"));
+		WebElement publicDropdownValue = getDriver().findElement(By.xpath("//*[@data-value='" + ownership + "']"));
 		clickUsingJs(publicDropdownValue);
 		return this;
 	}
@@ -79,7 +79,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 	}
 
 	public AccountsPage selectTypeOptions(String typeOptions) {
-		WebElement selectType = driver.findElement(By.xpath("//*[@title='" + typeOptions + "']"));
+		WebElement selectType = getDriver().findElement(By.xpath("//*[@title='" + typeOptions + "']"));
 		click(selectType);
 		return this;
 
@@ -93,7 +93,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 	}
 
 	public AccountsPage selectIndustryOptions(String industryOptions) {
-		WebElement industryOption = driver.findElement(By.xpath("//*[@data-value='" + industryOptions + "']"));
+		WebElement industryOption = getDriver().findElement(By.xpath("//*[@data-value='" + industryOptions + "']"));
 		click(industryOption);
 		return this;
 
@@ -168,7 +168,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 	}
 
 	public AccountsPage selectCustomerPriorityOptions(String priorityOptions) {
-		WebElement priorityOption = driver.findElement(By.xpath("//*[@data-value='" + priorityOptions + "']"));// .click();
+		WebElement priorityOption = getDriver().findElement(By.xpath("//*[@data-value='" + priorityOptions + "']"));// .click();
 		click(priorityOption);
 		return this;
 
@@ -180,7 +180,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 	}
 
 	public AccountsPage selectSlaOptions(String slaOptions) {
-		WebElement slaoOptions = driver.findElement(By.xpath("//*[@data-value='" + slaOptions + "']"));
+		WebElement slaoOptions = getDriver().findElement(By.xpath("//*[@data-value='" + slaOptions + "']"));
 		click(slaoOptions);
 		return this;
 
@@ -192,7 +192,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 	}
 
 	public AccountsPage selectActiveOption(String activeOptions) {
-		WebElement activeOption = driver.findElement(By.xpath("//span[@title='" + activeOptions + "']"));
+		WebElement activeOption = getDriver().findElement(By.xpath("//span[@title='" + activeOptions + "']"));
 		click(activeOption);
 		return this;
 
@@ -223,7 +223,7 @@ public class AccountsPage extends ProjectSpecificMethods {
 
 	public AccountsPage deleteSnackBarMessage(String noItems) {
 		waitUntilElementLocated("xpath", prop.getProperty("opportunities.snackbarmsg.xpath"));
-		WebElement noItemsMsg = driver.findElement(By.xpath("//span[text()='" + noItems + "']"));
+		WebElement noItemsMsg = getDriver().findElement(By.xpath("//span[text()='" + noItems + "']"));
 		Assert.assertTrue(verifyDisplayed(noItemsMsg));
 		return this;
 	}

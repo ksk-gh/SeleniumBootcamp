@@ -19,7 +19,7 @@ public interface Browser {
 
 	public void close();
 
-	public void quit();
+	public void closeAllBrowsers();
 
 	public void click(WebElement ele);
 
@@ -40,6 +40,12 @@ public interface Browser {
 	public void waitUntilStalenessof(WebElement ele);
 
 	public void clearAndTypeWithEnter(WebElement ele, String value);
+	
+	public void switchToFrame(String frame);
+	
+	public void switchToFrame(int index);
+	
+	public void switchToFrame(WebElement ele);
 
 	/*
 	 * public void switchToFrame(WebElement value); public void switchToFrame(String
@@ -53,4 +59,5 @@ public interface Browser {
 	 * 
 	 * public void verifyTitle();
 	 */
+	
 }

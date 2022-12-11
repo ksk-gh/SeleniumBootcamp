@@ -29,7 +29,7 @@ public class TasksPage extends ProjectSpecificMethods {
 	}
 
 	public TasksPage selectContactNameFromList(String statusoption) {
-		WebElement status = driver.findElement(By.xpath(prop.getProperty("//a[text()='" + statusoption + "']")));
+		WebElement status = getDriver().findElement(By.xpath(prop.getProperty("//a[text()='" + statusoption + "']")));
 		click(status);
 		return this;
 	}
@@ -40,7 +40,7 @@ public class TasksPage extends ProjectSpecificMethods {
 	}
 
 	public TasksPage selectStatusOption(String statusoption) {
-		WebElement statusOptions = driver.findElement(By.xpath("//a[text()='" + statusoption + "']"));
+		WebElement statusOptions = getDriver().findElement(By.xpath("//a[text()='" + statusoption + "']"));
 		clickUsingJs(statusOptions);
 		return this;
 	}
